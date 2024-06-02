@@ -11,5 +11,16 @@
 *.out
 *.ist
 *.toc
-*.run.xml
+*.lof
+*.lop
+*.lot
+*.xdy
+*-timestamp 
+latexmkrc-make 
+missfont.log
+*.synctex(busy)
+*.synctex.gz(busy)
+*.ps
+*.dvi
 *.synctex.gz
+*.run.xml

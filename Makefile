@@ -35,7 +35,12 @@ ALL_TARGETS := $(basename $(wildcard *.tex))
 # Por default, compila o primeiro arquivo .tex encontrado
 #DEFAULT_TARGET: $(word 1, $(ALL_TARGETS)).pdf
 # DEFAULT_TARGET: tese.pdf
+ifdef f
+DEFAULT_TARGET: ${f}.pdf
+else
 DEFAULT_TARGET: tese.pdf
+endif
+OUTDIR := build
 
 #SHOW_PDF_AFTER_COMPILATION := true
 SHOW_PDF_AFTER_COMPILATION := false
@@ -412,6 +417,12 @@ clean: tmpclean
 tmpclean: $(addsuffix -clean,$(ALL_TARGETS))
 
 distclean: $(addsuffix -distclean,$(ALL_TARGETS))
+
+limpa: $(addsuffix -limpa,$(ALL_TARGETS))
+
+%-limpa: %-clean
+	@echo '       removendo tudinho menos os PDFs'
+	-@rm -f $*.ps $*.dvi $*.synctex.gz
 
 %-distclean: %-clean
 	@echo '       removendo arquivos gerados ($*: pdf, ps, dvi, synctex.gz)'
