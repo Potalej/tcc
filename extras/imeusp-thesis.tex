@@ -112,8 +112,10 @@
   %
   \renewcommand\@coverTCCText{%
     Monografia Final\vspace{.5\baselineskip}\\
-    \@macCDXCIX{} --- Trabalho de\\
-    Formatura Supervisionado%
+    % \@macCDXCIX{} --- Trabalho de\\
+    \@mapMMLXXX{} --- Trabalho de\\
+    % Formatura Supervisionado%
+    Formatura
   }%
   \renewcommand\@coverQualiText{%
     Relatório apresentado ao\\
@@ -231,6 +233,7 @@
   \renewcommand\@coverTCCText{%
     Final Essay\vspace{.5\baselineskip}\\
     \@macCDXCIX{} --- Capstone Project%
+    \@mapMMLXXX{} --- Graduation Project%
   }%
   \renewcommand\@coverQualiText{%
     Report presented to the\\
@@ -826,6 +829,21 @@
 
     \@ifpackageloaded{libertine}
       {\renewcommand{\@macCDXCIX}{{\libertineOsF mac~499}}}
+      {}
+  }
+
+% 2080 = MMLXXX
+\@ifpackageloaded{fontspec}
+  {\providecommand{\@mapMMLXXX}{MAP~\oldstylenums{2080}}}
+  {
+    \providecommand{\@mapMMLXXX}{{\fontfamily{lmr}\selectfont MAP~\oldstylenums{2080}}}
+
+    \@ifpackageloaded{libertinus}
+      {\renewcommand{\@mapMMLXXX}{{\LibertinusSerifOsF MAP~2080}}}
+      {}
+
+    \@ifpackageloaded{libertine}
+      {\renewcommand{\@mapMMLXXX}{{\libertineOsF MAP~2080}}}
       {}
   }
 
