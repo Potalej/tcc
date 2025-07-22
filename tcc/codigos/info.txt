@@ -1,0 +1,21 @@
+# gravidade-fortran v0.1                          
+                                                  
+# configuracoes                                   
+-- corpos:  1000                                  
+-- metodo:  verlet                                
+-- G:  1.0000000000000000                         
+-- h:  0.40000000000000001E-1                     
+-- potsoft:  0.40000000000000001E-1               
+-- passos por instante:  10                       
+-- passos:  25000
+-- t0:  0                                         
+-- t1:  100                                       
+-- paralelisacao:  T                              
+-- correcao:  F                                   
+-- correcao margem erro:  0.10000000000000000E-2  
+-- correcao max num tent.:  1                     
+-- colisoes:  F                                   
+-- colisoes max. dist.:  0.01
+                                                  
+# simulacao:                                      
+-- duracao:  35.480001091957092

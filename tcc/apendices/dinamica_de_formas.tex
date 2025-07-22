@@ -1,0 +1,101 @@
+\chapter{Demonstrações de propriedades da Dinâmica de Formas}\label{apendice:demonstracoes_dinamica_de_formas}
+
+Em vias de facilitar a leitura e compreensão da teoria da Dinâmica de Formas para o PNCG, algumas demonstrações não foram apresentadas no corpo do texto. Porém, como tratam-se de resultados importantes para a teoria e cuja demonstração não foi publicada na literatura, vale apresentá-las neste apêndice.
+
+\begin{proposition}[Equação \ref{eq:new_constraints}]\label{prop:new_constraints}
+    Para as coordenadas objetivas $(\vet \sigma, \vet \pi)$, valem as propriedades
+    \begin{align}
+        \sum_{a=1}^N \vet \sigma_a \cdot \vet \sigma_a = 1, \quad
+        \sum_{a=1}^N \vet \pi^a \cdot \vet \sigma_a = 0, \nonumber \\
+        \sum_{a=1}^N \sqrt{m_a} \vet \sigma_a = 0, \quad
+        \sum_{a=1}^N \sqrt{m_a} \vet \pi^a = 0.
+    \end{align}
+\end{proposition}
+\begin{Proof}
+    \begin{flalign*}
+        \sum_{a=1}^{N} \vet \sigma_a \cdot \vet \sigma_a
+        = \dfrac{1}{R^2} \sum_{a=1}^{N} m_a \vet q_a \cdot \vet q_a
+        = \dfrac{R^2}{R^2} = 1.&&
+    \end{flalign*}
+    \begin{flalign*}
+        \sum_a \vet \pi^a \cdot \vet \sigma_a
+        = \dfrac{\cancel R}{D_0} \dfrac{1}{\cancel R} \sum_a \dfrac{\vet p^a_{cm}}{\cancel{\sqrt{m_a}}} \cancel{\sqrt{m_a}} \vet q_a^{cm} - \dfrac{D}{D_0} \sum_a \vet \sigma_a \cdot \vet \sigma_a
+        = \dfrac{D}{D_0} - \dfrac{D}{D_0} = 0.&&
+    \end{flalign*}
+    \begin{flalign*}
+        \sum_a \sqrt{m_a} \vet \sigma_a 
+        = \dfrac{1}{R} \sum_a m_a \vet q_a
+        = \dfrac{1}{R} \sum_a m_a \vet q_a
+        = \vet 0.&&
+    \end{flalign*}
+    \begin{flalign*}
+        \sum_a \sqrt{m_a} \vet \pi^a 
+        = \dfrac{R}{D_0} \sum_a \dfrac{\sqrt{m_a}}{\sqrt{m_a}}\vet p^a - \dfrac{D}{D_0} \sum_a \sqrt{m_a} \vet \sigma_a
+        = \vet 0.&&
+    \end{flalign*}
+\end{Proof}
+
+\begin{proposition}[Invariância por escala, equação \ref{eq:invariancia_por_escala}]\label{prop:invariancia_por_escala}
+    As coordenadas objetivas $(\vet \pi, \vet \sigma)$ são invariantes por escala, pois comutam com $D$ e com $R$,
+    \begin{equation*}
+        \{ f(D, R), \vet \pi_a \} = \{ f(D,R), \vet \sigma_a \} = 0.
+    \end{equation*}
+\end{proposition}
+\begin{Proof}
+    Primeiro, observe que $\vet x$ comutar com $f(D, R)$ equivale a $\vet x$ comutar com $D$ e com $R$:
+    \begin{align*}
+        \{ f(D,R), \vet x \}
+        &= \sum_a \derpar{f(D,R)}{\vet q_a} \cdot \derpar{\vet x}{\vet p^a} - \derpar{f(D,R)}{\vet p^a} \cdot \derpar{\vet x}{\vet q_a} 
+        \\
+        &= \sum_a \left[ \derpar{f}{D} \derpar{D}{\vet q_a} + \derpar{f}{R} \derpar{R}{\vet q_a} \right] \derpar{\vet x}{\vet p^a} - \left[ \derpar{f}{D} \derpar{D}{\vet p^a} + \derpar{f}{R} \derpar{R}{\vet p^a} \right] \derpar{\vet x}{\vet q_a}
+        \\
+        &= \derpar{f}{D} \sum_a \left[\derpar{D}{\vet q_a} \derpar{\vet x}{\vet p^a} - \derpar{D}{\vet p^a} \derpar{\vet x}{\vet q_a} \right] + \derpar{f}{R} \sum_a \left[\derpar{R}{\vet q_a} \derpar{\vet x}{\vet p^a} - \derpar{R}{\vet p^a} \derpar{\vet x}{\vet q_a} \right] 
+        \\
+        &= \derpar{f}{D} \{D, \vet x\} + \derpar{f}{R} \{R, \vet x\}.
+    \end{align*}
+    Assim, basta verificar as comutatividades individuais. Temos as derivadas parciais:
+    \begin{align*}
+        \derpar{\vet \sigma_a}{\vet q_b} = \dfrac{\sqrt{m_a}}{R^2}\left(\delta_a^b R - \dfrac{m_b}{R} \vet q_a \cdot \vet q_b\right),
+        \quad
+        \derpar{\vet \sigma_a}{\vet p_b} = 0,
+        \quad
+        \derpar{\vet \pi^a}{\vet p_b} = \dfrac{R}{\sqrt m_a} \delta_a^b - \vet q_b \cdot \vet \sigma_a,
+        \\
+        \derpar{\vet \pi^a}{\vet q_b} = \dfrac{m_b}{\sqrt{m_a}} R  \vet p^a \cdot \vet q_b - \vet p^a \cdot \vet \sigma_a - \dfrac{D \sqrt{m_a}}{R^2} \left( \delta_a^b R - \dfrac{m_b}{R} \vet q_a \cdot \vet q_b \right).
+    \end{align*}
+    Então:
+    \begin{flalign*}
+        \{D, \vet \sigma_a \} 
+        &= \sum_i \vet p^i \derpar{\vet \sigma_a}{\vet p^i} - \vet r_i \derpar{\vet \sigma_a}{\vet r_i}
+        = - \sum_i \vet r_i \dfrac{\sqrt{m_a}}{R^2}\left( \delta_a^i R - \dfrac{m_i}{R} \vet q_a \cdot \vet r_i \right)&&
+        \\
+        &= - \dfrac{\sqrt{m_a}}{R} \vet q_a + \dfrac{\sqrt{m_a}}{R} \vet q_a \sum_i \dfrac{m_i \vet r_i \cdot \vet r_i}{R^2} 
+         = - \dfrac{\sqrt{m_a}}{R} \vet q_a + \dfrac{\sqrt{m_a}}{R} \vet q_a \sum_i \vet \sigma_i \cdot \vet \sigma_i = 0.&&
+    \end{flalign*}
+    \begin{flalign*}
+        \{R, \vet \sigma_a \} = 
+        \sum_i \derpar{R}{\vet r_i} \derpar{\vet \sigma_a}{\vet p^i} - \derpar{R}{\vet p^i} \derpar{\vet \sigma_a}{\vet r_i} = 0.&&
+    \end{flalign*}
+    \begin{flalign*}
+        \{D, \vet \pi^a \} 
+        &= \sum_i \vet p^i \left( \dfrac{R}{\sqrt{m_a}}\delta_a^i - \vet r_i \vet \sigma_a \right) - \vet r_i \derpar{\vet \pi_a}{\vet q_i} 
+        = \vet \pi^a - \dfrac{R}{\sqrt{m_a}} \vet p^a \sum_i \norma{\vet \sigma_i}^2 - \dfrac{D\sqrt{m_a}}{R} \vet q_a \sum_i \norma{\sigma_i}^2 &&
+        \\ 
+        &= \vet \pi^a - \dfrac{R}{\sqrt{m_a}} \vet p^a - \dfrac{D \sqrt{m_a}}{R} \vet q_a
+        = \vet \pi^a - \vet \pi^a = 0. &&
+    \end{flalign*}
+    \begin{flalign*}
+        \{R, \vet \pi^a\} 
+        &= \sum_i \derpar{R}{\vet r_i} \derpar{\vet \pi^a}{\vet p^i} - \derpar{R}{\vet p^i}\derpar{\vet \pi^a}{\vet r_i}
+         = \sum_i \dfrac{m_i \vet r_i}{R} \left( \dfrac{R}{\sqrt{m_a}} \delta_a^i - \vet r_i \vet \sigma_a \right) &&
+         \\
+        &= \sqrt{m_a} \vet q_a - \vet \sigma_a \sum_i \dfrac{m_i \vet r_i \vet r_i}{R}
+         = \sqrt{m_a} \vet q_a - R \vet \sigma_a \sum_i \norma{\vet \sigma_i}^2 &&
+         \\
+        &= R(\vet \sigma_a - \vet \sigma_a) = 0.&&
+    \end{flalign*}
+    Assim, obtivemos que
+    \begin{equation*}
+        \{D, \vet \sigma_a\} = \{D, \vet \pi^a \} = \{R, \vet \sigma_a\} = \{R, \vet \pi^a\} = 0.
+    \end{equation*}
+\end{Proof}

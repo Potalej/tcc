@@ -1,0 +1,54 @@
+\chapter{Introdução}
+
+Os fenômenos celestes encantam e interessam o ser humano desde os seus primórdios, mas foi apenas no século XVII que uma primeira descrição concisa e global do movimento foi apresentada por Isaac Newton. Se até então o movimento dos corpos celestes era descrito através de modelos específicos, como as Leis de Kepler, através da Lei da Gravitação Universal foi possível modelar o movimento de quase qualquer tipo de sistema planetário, estelar ou galático.
+
+Isso foi possível graças ao novo ferramental desenvolvido na mesma época: o cálculo diferencial e integral. O movimento passou a ser descrito por equações nem sempre explicitamente solucionáveis, mas que forneciam importantes resultados qualitativos sobre o problema. No caso de sistemas gravitacionais, o movimento de um sistema com $N$ corpos é descrito pela Lei da Gravitação Universal de Newton:
+\begin{equation*}
+    m_a \ddvet q_a = \sum_{b \neq a} G \dfrac{m_a m_b}{\norma{\vet q_b - \vet q_a}},
+    \quad \text{ para } a=1, 2, ..., N.
+\end{equation*}
+Se é fixado um conjunto de valores iniciais a partir dos quais o sistema evolui através da Lei de Gravitação, tem-se então o chamado \textit{Problema de N-Corpos Gravitacional} (PNCG). Existem outras formas de enunciar o problema, como através de uma Equação de Poisson, mas nos manteremos na formulação direta do problema.
+
+Devido à já mencionada falta de soluções explícitas no geral, o PNCG foi muitas vezes alvo de métodos criativos para simulá-lo. Embora métodos de quadratura já fossem utilizados por babilônios há mais de 2 mil anos para prever a posição de Júpiter \citep{Ossendrijver2016}, a dificuldade de uma simulação de grande porte só começou a ser resolvida na metade do século XX.
+
+Nessa época, é memorável por sua inventividade uma simulação de duas galáxias realizada por Erik Holmberg com o uso de 37 lâmpadas para cada uma \citep{Holmberg1941}. A odisseia de Holmberg com este experimento, embora extremamente trabalhoso e computacionalmente primitivo, forneceu resultados qualitativos novos acerca da colisão de galáxias que décadas mais tarde se comprovaram através de observações de galáxias reais.
+
+Alguns anos depois, o desenvolvimento da computação permitiu o início de simulações específicas de $N$-corpos, com foco na observação das trajetórias individuais. As simulações eram feitas através de métodos de integração numérica dos mais variados tipos e ordens de convergência. No entanto, já em 1964, o erro exponencial nas trajetórias que divergiam numericamente foi observado e provado e a divergência de soluções levou Richard Miller (e vários outros) a questionar a validade das simulações de $N$-corpos \citep{Miller1964}.
+
+Apesar disso, como o próprio experimento de Holmberg já provava, a precisão de trajetórias individuais nem sempre é necessária para obter resultados válidos. De fato, a simulação do PNCG para grandes valores de $N$ é estatisticamente válida no geral, ainda que haja divergência entre as trajetórias obtidas por diferentes métodos \citep{Boekholt2015}. É evidente então que a validade de uma simulação depende de seu contexto e de seu objetivo, mais do que de sua verossimilhança absoluta. Como o cosmólogo Andrew Pontzen sintetiza,
+\begin{displayquote}
+    As simulações são um canal no processo da ciência. Elas não fornecem uma hipótese; isso é dado pela teoria subjacente. Elas não fornecem dados; eles são fornecidos pelo experimento ou observação específica. Em vez disso, elas fornecem a conexão entre esses dois, prevendo o que os dados \textit{seriam} sob cada hipótese. Há uma complicação pois previsão é sempre aproximada [...]. Entender se as aproximações estão ou não distorcendo uma comparação específica é a arte da simulação. \citep[172]{Pontzen2023-ik}
+\end{displayquote}
+
+Neste trabalho, nossa tática de simulação do PNCG é o foco na conservação das integrais primeiras do sistema, ou seja, de quantidade que são conservadas no decorrer de uma trajetória, como a energia total. Isso se deve aos objetivos definidos: \textit{visualizar resultados teóricos} e \textit{aprender a fazer simulações eficientes}.
+
+O primeiro objetivo foi o primeiro também cronologicamente. Este trabalho começou com o estudo de um modelo de gravitação alternativo chamado \textit{Dinâmica de Formas} (ou \textit{Shape Dynamics}, do inglês) e a vontade de visualizarmos nós mesmos os resultados numéricos apresentados pelos autores da teoria no artigo \cite{Barbour2014_identification}.
+
+Disso decorreu a necessidade de aprender sobre o PNCG, sobre suas propriedades analíticas e os resultados já conhecidos de sua dinâmica. Também veio a necessidade de aprender sobre métodos de integração numérica eficientes, o que naturalmente levou aos métodos de integração simpléticos. A partir disso foi necessário explorar a Mecânica Hamiltoniana, uma vez que os termos da Dinâmica de Formas também estavam nessa linguagem diferente da Mecânica Newtoniana tradicional. Em meio a tudo isso, veio o segundo objetivo, que é a junção de toda a teoria estudada e o desenvolvimento de um simulador numérico nosso, disponível em \href{https://github.com/potalej/gravidade-fortran}{https://github.com/potalej/gravidade-fortran} \citep{potalej_gravidade-fortran}.
+
+Assim, o trabalho foi estruturado como segue. Em seguida a esta seção introdutória, o capítulo 2 é uma introdução às diferentes formulações da mecânica: Newtoniana, Lagrangiana e Hamiltoniana. Devido ao interesse nos integradores simpléticos, a seção de Mecânica Hamiltoniana se aprofunda um pouco mais em formas diferenciais e conceitos de geometria simplética para justificar melhor a preferência no uso de métodos simpléticos para simulações.
+
+O capítulo 3 enuncia o PNCG de fato, e tem em sua última seção uma introdução à Dinâmica de Formas aplicada no PNCG, com foco na predição de setas do tempo gravita\-cionais. Algumas demonstrações da seção de Dinâmica de Formas foram direcionadas para o apêndice 2, de modo a facilitar a leitura.
+
+O capítulo 4 trata de métodos numéricos de passo único, começando com integradores tradicionais e partindo para integradores simpléticos. Além disso, um corretor numérico (independente do integrador) também é apresentado. Os testes neste e no próximo capítulo são feitos a partir de problemas-modelo de N-corpos, isto é, condições iniciais escolhidas e padronizadas. Estes constam no primeiro apêndice.
+
+O capítulo 5 é a consolidação da teoria. Apresentamos a estrutura do programa desenvolvido e questões práticas que tivemos nesse desenvolvimento. Também apresentamos a forma com a qual lidamos com a geração de valores iniciais para o PNCG, o uso de colisões e do corretor. Por fim, encerramos o capítulo com a visualização dos resultados previstos da Dinâmica de Formas.
+
+Há um último capítulo dedicado à conclusão, no qual discorremos sobre os resultados obtidos e as dificuldades que atravessaram este trabalho.
+
+% \begin{displayquote}
+%     Desse ponto de vista, as simulações são um canal no processo da ciência. Elas não fornecem uma hipótese; isso é dado pela teoria subjacente. Elas não fornecem dados; eles são fornecidos pelo experimento ou observação específica. Em vez disso, elas fornecem a conexão entre esses dois, prevendo o que os dados \textit{seriam} sob cada hipótese. Há uma complicação pois previsão é sempre aproximada [...]. Entender se as aproximações estão distorcendo ou não uma comparação específica é a arte da simulação. \citep[172]{Pontzen2023-ik}
+% \end{displayquote}
+
+
+
+
+% A evolução de sistemas gravitacionais é complexa e as soluções de suas equações de movimento até então encontradas convergem lentamente, sendo inutilizáveis na prática. Nesse sentido, simular numericamente esse tipo de sistema permite visualizar aproximações das soluções e verificar hipóteses e proposições acerca de sua evolução.
+
+% Para isso, utilizaremos o Problema de N-Corpos (PNC) como \textit{toy-model} de sistemas gravitacionais. Estudaremos algumas de suas propriedades qualitativas e o seu uso na descrição quantizada da \textit{Dinâmica de Formas}, que é um modelo de gravidade relacionalista emergente baseado em Relatividade Geral.
+
+% Numericamente, estudaremos a simulação do PNC passando pela determinação de valores iniciais, os métodos de integração numérica comuns e os simpléticos, formas de lidar com as singularidades e também as dificuldades da implementação prática das simulações utilizando as linguagens de programação Python e Fortran.
+
+% Nossos objetivos serão visualizar as setas do tempo propostas pela Dinâmica de Formas, investigar a caracterização do caos dentro do PNC e avaliar sua estabilidade, e a possibilidade de estender os resultados qualitativos e numéricos do PNC para sistemas de gravidade mais complexos, partindo do exemplo do PNC com colisões perfeitamente elásticas.
+
+% Explicar seções.

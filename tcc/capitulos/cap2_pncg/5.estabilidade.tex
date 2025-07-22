@@ -1,0 +1,97 @@
+\section{Estabilidade}
+% Falar um pouco da estabilidade e das ideias do momento de dilatação talvez. A princípio usar o capítulo do Volchan.
+
+A principal motivação da última subseção foi obter uma forma conservativa de estender soluções do PNCG que são ``interrompidas''. Essa interrupção é, no sentido matemático, uma singularidade na órbita, o que limita o intervalo maximal para um tempo finito. O caso mais simples de interrupção é justamente uma colisão entre dois ou mais corpos.
+
+\begin{definition}[Colisão]
+    Diz-se que ocorre uma colisão no instante $t^*$ se cada $\vet q_j(t)$ tem limite finito quando $t \to t^*$, no sentido de que para algum $i \neq k$, $\vet q_i(t^*) = \vet q_k(t^*)$. Se para todo $i,k=1,2,...,N$ tem-se que $\vet q_i(t^*) = \vet q_k(t^*)$, então tem-se um \textbf{colapso total}.
+\end{definition}
+
+Apesar de ser uma exceção, o colapso total ocorre em situações interessantes para este trabalho. Decorre do teorema \ref{teorema:distanciamento} que se ele ocorre em algum instante $t = t^*$, então ele ocorre na origem. Para isso, basta ver pela definição \ref{def:momento_inercia} que $I(t^*) = 0$, então $q_{max} = 0$. Além disso, uma colisão total só ocorre em tempo finito.
+
+\begin{proposition}
+    Se ocorre o colapso total em $t=t^*$, então $t^* < +\infty$.
+\end{proposition}
+\begin{Proof}
+    Suponha que $t^* = +\infty$. Como o colapso total ocorre na origem,
+    \begin{equation*}
+        \lim_{t \to +\infty} V(\vet q(t)) = - \infty
+        \Rightarrow
+        \lim_{t \to +\infty} \ddot I(t) = +\infty
+    \end{equation*}
+    através da identidade de Lagrange-Jacobi. Assim, existe $t_1 > 0$ de modo que para todo $t > t_1$ vale que $\ddot I(t) \geq 1$. Então:
+    \begin{equation*}
+        I(t) \geq \frac{1}{2} t^2 + c_1 t + c_2,
+        \Rightarrow
+        \lim_{t \to +\infty} I(t) = +\infty,
+    \end{equation*}
+    o que é uma contradição.
+\end{Proof}
+
+Outro ponto é que só ocorre o colapso total dentro de uma hipersuperfície específica do espaço de fases.
+
+\begin{theorem}[Sundman-Weierstrass]
+    Se ocorre o colapso total, então $\vet J = \vet 0$.
+\end{theorem}
+
+A demonstração pode ser encontrada em \citep[62-63]{Volchan:2007}. Um resultado importante também de Sundman é que se $\vet J \neq 0$, então não ocorrem colisões triplas. Na prática, através da regularização das colisões binárias, a solução de um problema com $\vet J \neq 0$ pode ter intervalo maximal estendido para toda a reta.
+
+Nesse momento, qualquer definição de ``estabilidade'' das órbitas deve supor que não ocorre o colapso total, mas isso ainda não é suficiente. Um critério mais bem-definido proposto por Volchan é: para todo $i \neq j$ e todo $t \in \R$ e para uma constante $K > 0$,
+\begin{enumerate}
+    \item $r_{ij} \neq 0$;
+    \item $r_{ij} \leq K$.
+\end{enumerate}
+Isto é, o sistema não só não cai sobre si mesmo, como também se mantém confinado em um cilindro de raio $K$. No caso de $\vet P = 0$, o sistema se encontra parado, então a restrição corresponde a uma esfera de raio $K$. Sistemas periódicos, por exemplo, atendem a essa propriedade.
+
+De forma geral, Jacobi propôs uma condição necessária \citep[65]{Volchan:2007}.
+
+\begin{theorem}[Critério de estabilidade de Jacobi]
+    Uma condição necessária para que a solução seja estável é que a energia total seja negativa.
+\end{theorem}
+\begin{Proof}
+    Como comentado anteriormente, se a energia é não-negativa então $I$ assume formato côncavo e é limitado inferiormente. Assim, $\lim_{t \to \infty} I(t) = +\infty$, então o tamanho do sistema não é limitado.
+\end{Proof}
+
+Para $N=2$, a condição é suficiente. Porém, isso não se estende para $N \geq 3$. Ainda assim, é possível obter outra condição necessária a partir da relação de Lagrange-Jacobi, ao que se denomina usualmente por \textbf{teorema do virial}.
+
+\begin{theorem}[Teorema do virial]\label{teorema:virial}
+    Uma condição necessária para que um sistema seja limitado é que
+    \begin{equation*}
+        \langle T \rangle_\tau = - \frac{1}{2} \langle V \rangle_\tau.
+    \end{equation*}
+\end{theorem}
+\begin{Proof}
+    O operador $\langle \cdot \rangle_\tau$ corresponde à média temporal no intervalo $[0, \tau]$. Pela identidade de Lagrange-Jacobi,
+    \begin{equation*}
+        \left\langle \der{D}{t} \right\rangle_{\tau}
+        = 2 \langle T \rangle + \langle V \rangle.
+    \end{equation*}
+    Se um sistema é limitado então o momento de dilatação $D$ é limitado, e, uma vez que
+    \begin{equation*}
+        \left\langle \der{D}{t} \right\rangle_{\tau}
+        = \frac{1}{\tau} \int_0^\tau \der{D}{t} dt = \dfrac{D(\tau) - D(0)}{\tau},
+    \end{equation*}
+    então
+    \begin{equation*}
+        \lim_{\tau \to \infty} \left| \left\langle \der{D}{t} \right\rangle_{\tau} \right| \leq \lim_{\tau \to \infty} \dfrac{D_{max} - D_{min}}{\tau} = 0.
+    \end{equation*}
+    Assim, vale $\langle T \rangle_\tau = - \frac{1}{2} \langle V \rangle_\tau$.
+\end{Proof}
+
+É possível estimar uma região do espaço em que vale o equilíbrio (de virial). Considere $N$ partículas dispostas com distância média $R_V$ com massa média $\bar m = M / N$, para $M = \sum_{a=1}^N m_a$. Temos que:
+\begin{equation*}
+    V = - G \sum_{a < b} \dfrac{m_a m_b}{r_{ab}}
+    \approx - G \sum_{a<b} \bar m^2 \dfrac{1}{R_V}
+    = - G \dfrac{M^2}{N^2} \dfrac{N (N-1)}{2 R_V}
+    = - G \dfrac{M^2}{2 R_V} \dfrac{N-1}{N}.
+\end{equation*}
+Para $N$ grande, temos que
+\begin{equation}\label{eq:raio_virial}
+    V \approx - \dfrac{G M^2}{2 R_V}
+    \Rightarrow
+    R_V \approx \dfrac{G M^2}{2 |V|}.
+\end{equation}
+
+Tal $R_V$ é chamado \textbf{raio de virial}. A busca por sistemas estáveis deve começar por sistemas com energia negativa e para os quais valem o teorema do virial, e o raio de virial é útil nesse sentido. Isso é utilizado na geração de valores iniciais na seção \ref{subsection:condicoes_aarseth}, com as condições iniciais propostas por \citep{aarseth_gravitational_2003}. 
+
+Também pode ser razoável supor que o momento angular total seja não nulo se o propósito for buscar estabilidade com mais facilidade, embora isso não seja condição necessária.

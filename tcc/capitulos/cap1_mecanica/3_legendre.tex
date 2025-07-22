@@ -1,0 +1,142 @@
+\subsection{Transformação de Legendre e Equações de Hamilton}
+
+Observe que até então o par considerado era $(\vet q, \vet v)$, ou seja, pontos no fibrado tangente de $M$. Na definição \ref{def:generalizados} foi apresentado o conceito de momento generalizado, e o par $(\vet q, \vet p)$ se encontra no fibrado cotangente de $M$. Tal construção de coordenadas é explorada com um pouco mais de detalhes na seção \ref{secao:mecanica_hamiltoniana}. Para o que interessa agora, a transformação de Legendre é uma aplicação entre os dois espaços.
+
+\begin{definition}
+    Sejam $U \subseteq \R^n \times \R^m$ aberto e $X:U \to \R$ de classe $\continuo^{k+2}$. Dizemos que $X$ é \textbf{Legendre transformável} em $x$ se a aplicação
+    \begin{equation*}
+        F:(\alpha, x) \in U \quad \mapsto \quad (\alpha, y) \in \R^n \times \R^m
+    \end{equation*}
+    definida por
+    \begin{equation*}
+        y = \derpar{X}{x}(x, \alpha), \quad \alpha = \alpha
+    \end{equation*}
+    é um difeomorfismo $\continuo^{k+1}$ sobre a imagem $F(U)$.
+\end{definition}
+
+\begin{definition}
+    Considere $X$ Legendre transformável, nos mesmos espaços. A aplicação $Y:V \to \R$ definida por
+    \begin{equation*}
+        (\alpha, y) = F(\alpha, x) \quad \Rightarrow \quad X(\alpha, x) + Y(\alpha, y) = \prodint{x}{y}
+    \end{equation*}
+    é chamada \textit{transformada de Legendre de $X$}.
+    De maneira explícita:
+    \begin{equation*}
+        Y(y, \alpha) = (F^{-1})(y, \alpha) y - X(F^{-1}(y, \alpha)),
+    \end{equation*}
+    e a transformação $y = \partial X/\partial x$ é chamada \textbf{transformação de Legendre}.
+\end{definition}
+
+É mister observar que a transformada de Legendre é involutiva, ou seja, se $X$ é Legendre transformável com transformada $Y$, então $Y$ é Legendre transformável com transformada $X$ \citep[79]{de_queiroz_barros_mecanica_1995}. Além disso, trata-se de uma aplicação que leva uma função a um funcional linear definido no dual do espaço original.
+
+Partindo de Lagrange, a função lagrangiana $L = \frac{1}{2} m \vet v^2 - V$ é uma função suave, uma vez que $V$ é suave, e o momento generalizado também o é, então a aplicação que leva $(\vet q, \vet v)$ em $(\vet q, \vet p)$ é um difeomorfismo suave. Assim, $L$ é uma função Legendre transformável em relação a $\vet v$.
+
+\begin{definition}[Função hamiltoniana]
+    A transformada de Legendre $H$ de $L$ é chamada de \textit{função hamiltoniana} e é dada por
+    \begin{equation}\label{eq:legendre_hamilton}
+        H(\vet q, \vet p) = \prodint{\vet v}{\vet p} - L(\vet q, \vet v)
+    \end{equation}
+\end{definition}
+
+\begin{observation}
+    Quando $L = \frac{1}{2} m \vet v^2 - V$, a função hamiltoniana corresponde à energia total como definida em (\ref{eq:energia_total}), pois
+    \begin{equation*}
+        H = \prodint{\vet v}{\vet p} - L 
+        = \prodint{\vet v}{\derpar{L}{\vet v}} - \frac{1}{2} m \vet v^2 + V
+        = m \norma{\vet v}^2 - \frac{1}{2} m \vet v^2 + V
+        = \frac{1}{2 m} \vet p^2 + V.
+    \end{equation*}
+    Aqui, a energia cinética pode ser escrita em função do momento generalizado:
+    \begin{equation}
+        T(\vet p) = \dfrac{\vet p^2}{2m}.
+    \end{equation}
+\end{observation}
+
+Enquanto $L$ está definida sobre o fibrado tangente $TM$, $H$ estará definida sobre o fibrado cotangente $T^*M$, que é o fibrado dual de $TM$ \citep[192]{Tu2010-sb}. A função hamiltoniana também fornece um novo conjunto de equações de movimento, chamadas \textit{equações de Hamilton}.
+
+\begin{theorem}[Equações de Hamilton]\label{teorema:equacoes_hamilton}
+    A função hamiltoniana gera as seguintes equações de movimento:
+    \begin{equation*}
+        \der{\vet q}{t} = \derpar{H}{\vet p},
+        \quad
+        \der{\vet p}{t} = - \derpar{H}{\vet q}.
+    \end{equation*}
+\end{theorem}
+\begin{Proof}
+    Basta derivar (\ref{eq:legendre_hamilton}):
+    \begin{align*}
+        \derpar{H}{\vet q} = -\derpar{L}{\vet q} = \derpar{V}{\vet q} = - \dvet p, \quad
+        \derpar{H}{\vet p} = \vet v - \left(\vet p - \derpar{L}{\vet v}\right) \derpar{\vet v}{\vet p} = \vet v = \dvet q.
+    \end{align*}
+\end{Proof}
+
+Definindo $\vet z = (\vet q, \vet p)$, há uma forma reduzida para as equações de Hamilton:
+\begin{equation*}
+    \dvet z(t) = \begin{bmatrix}
+        \vet 0 & \vet I \\ - \vet I & \vet 0
+    \end{bmatrix}
+    \nabla_{\vet z} H(\vet z(t))
+    = \bm \Omega \nabla_{\vet z} H(\vet z(t)),
+\end{equation*}
+onde $\bm \Omega$ é chamada \textbf{matriz simplética}. Este nome será justificado na próxima seção.
+
+A importância da formulação hamiltoniana começa a aparecer a partir do seguinte teorema.
+
+\begin{theorem}\label{teorema:hamiltoniano_volume}
+    O fluxo hamiltoniano $\varphi = (\vet q, \vet p)$ dado por $\der{}{t} \varphi = V$, onde $V = (\dvet q, \dvet p) = (\nabla_{\vet p} H, - \nabla_{\vet q} H)$, conserva volume.
+\end{theorem}
+
+Antes de prová-lo, é necessário um lema.
+
+\begin{lemma}\label{lema:divergente_volume}
+    Sejam $\varphi: I \subseteq \R \to \R^n$ e $F: \R^n \to \R^n$ tais que
+    \begin{equation*}
+        \der{\varphi}{t} = F(\varphi(t)),
+    \end{equation*}
+    e suponha que $\nabla \cdot F = 0$. Então sendo $R_0 \subseteq \R^n$ uma região compacta cuja evolução é dada por $R(t) = \{\varphi(t) | \varphi(0) \in R_0\}$, o volume de $R(t)$ é constante no tempo. 
+\end{lemma}
+\begin{Proof}
+    O volume $V(t)$ de $R(t)$ é dado por
+    \begin{equation*}
+        V(t) = \int_{R(t)} d\vet x.
+    \end{equation*}
+    Assim, para um pequeno $dt > 0$, tem-se que
+    \begin{equation*}
+        V(t+dt) = \int_{R(t)} \det{\derpar{\varphi_i(t+dt)}{\varphi_j(t)}} d\vet x,
+    \end{equation*}
+    onde o último termo é o determinante da matriz jacobiana da aplicação que leva $\varphi(t)$ a $\varphi(t+dt)$, dada a mudança de coordenadas imposta. Pela definição de derivada,
+    \begin{equation*}
+        \varphi_i(t+dt) = \varphi_i(t) + V_i(\varphi(t)) dt + O(dt^2),
+    \end{equation*}
+    logo
+    \begin{equation*}
+        \derpar{\varphi_i(t+dt)}{\varphi_j(t)} = \delta_{ij} + \derpar{V_i}{x_j} dt + O(dt^2).
+    \end{equation*}
+
+    Considere agora uma matriz $A$ qualquer, com autovalores $\lambda_i$. A matriz $I + \epsilon A$, para $\epsilon$ suficientemente pequeno, terá autovalores $1 + \epsilon \lambda_i$. Dessa forma, tem-se que:
+    \begin{equation*}
+        \det{\left(I + \epsilon A \right)} = \prod (1 + \epsilon \lambda_i) = 1 + \epsilon \sum_i \lambda_i + O(\epsilon^2) = 1 + \epsilon \Tr A + O(\epsilon^2).
+    \end{equation*}
+
+    Dessa forma, o volume $V(t+dt)$ pode ser escrito como
+    \begin{align*}
+        V(t+dt) &= \int_{R(t)} \left\lvert \delta_i^j + \derpar{V_i}{x_j}dt + O(dt^2) \right\rvert d\vet x\\
+        &= \int_{R(t)} \left(1 + \nabla \cdot V dt + O(dt^2) \right) d\vet x \\
+        &= V(t) + \int_{R(t)} (\nabla \cdot V dt) d\vet x + O(dt^2) \\
+        \therefore \der{V}{t} &= \int_{R(t)} \nabla \cdot V d\vet x.
+    \end{align*}
+
+    Assim, se $\nabla \cdot V = 0$, volume do fluxo não varia com o tempo.    
+\end{Proof}
+
+\begin{Proof} (Do teorema)
+    Conforme o lema \ref{lema:divergente_volume}, basta verificar que o divergente do campo hamiltoniano é nulo.
+    \begin{equation*}
+        \nabla \cdot V 
+        = \derpar{\dvet q}{\vet q} + \derpar{\dvet p}{\vet p}
+        = \dfrac{\partial^2 H}{\partial \vet q \partial \vet p} - \dfrac{\partial^2 H}{\partial \vet p \partial \vet q} = 0,
+    \end{equation*}
+    pois $H$ é suave.
+\end{Proof}
+
+Isso significa que no espaço das coordenadas $(\vet q, \vet p)$, também chamado de \textit{espaço de fases}, o fluxo tem seu volume conservado na órbita das soluções.

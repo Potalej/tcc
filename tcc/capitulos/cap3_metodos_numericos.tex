@@ -1,0 +1,84 @@
+\chapter{Métodos numéricos}\label{capitulo:metodos_numericos}
+
+A integração numérica é o processo de aproximar o valor de uma integral numericamente com alguma margem de erro. Existe uma infinidade de formas de calcular essa aproximação, desde métodos baseados puramente em ferramentas básicas de cálculo até métodos baseados em teoria de variedades diferenciáveis e grupos de Lie.
+
+Neste capítulo apresentamos uma pequena parte destes métodos, aplicando-os especificamente para a integração temporal, e contemplando principalmente o que foi utilizado nas simulações do PNCG. O capítulo começa com métodos tradicionais, baseados em cálculo de derivadas e geometria, principalmente para facilitar a habituação com os conceitos de integração numérica. Recomendamos \cite{alexandre_megiorin_roma_metodos_nodate} e \cite{Butcher2016-jx} para um estudo mais aprofundado.
+
+Em seguida, entramos no ramo dos integradores simpléticos, aplicando numericamente os conceitos apresentados no capítulo \ref{capitulo:revisao_mecanica} a respeito da Mecânica Hamiltoniana. Em resumo, os integradores simpléticos são elaborados levando-se em conta não somente aspectos geométricos da função que está sendo integrada, mas também de todo o espaço que a contém. No caso, integramos sistemas hamiltonianos e portanto as propriedades do espaço de fases, como as integrais primeiras, são levadas em conta nos métodos através do conceito de \textit{simplectomorfismo}. A bibliografia principal utilizada e altamente recomendada é \cite{Hairer2006-oz} e \cite{Leimkuhler2005}.
+
+Ao final, apresentamos um corretor numérico utilizado posteriormente à integração. O corretor se baseia nas integrais primeiras e aplica uma projeção via método de quadrados mínimos entre as hipersuperfícies no espaço de fases, fornecendo uma aproximação verossímil ao problema no sentido de que a estrutura simplética passa a ser conservada nas trajetórias ainda que não seja utilizado um integrador simplético.
+
+Existem muitos outras formas de fazer a integração numérica. Em muitos contextos são utilizados métodos implícitos (explicados mais adiante), métodos com tamanho de passo variável, e até métodos voltados especificamente para o PNCG que preservam a energia e o momento angular com precisão de máquina, como \cite{Kotovych2002} propõem. Neste trabalho nos limitamos aos métodos explícitos tradicionais e aos simpléticos.
+
+Por fim, os métodos foram testados com problemas-modelo escolhidos. Estes constam no Anexo \ref{apendice:problemas-modelo}.
+
+% \begin{table}[]
+%     \centering
+%     \begin{tabular}{c|ccccccc}
+%         $h$              & E. S. & Verlet & Ruth3 & Ruth4 & RK4 & RKN551 & RKN671  \\
+%         \hline
+%         $1/10$  & $1.129548$ & $1.904978$ & $3.567326$ & $3.398327$ &	$3.964893$ & $5.367215$ & $5.392546$ \\
+%         $1/20$  & $1.057072$ & $1.974542$ & $3.659927$ & $3.840014$ &	$4.046272$ & $5.869322$ & $5.836890$ \\
+%         $1/40$  & $1.021997$ & $1.993517$ & $3.540536$ & $3.959375$ &	$4.041771$ & $5.998531$ & $5.958402$ \\
+%         $1/80$  & $1.008801$ & $1.998372$ & $3.361093$ & $3.989805$ &	$4.025951$ & $5.948801$ & $5.989673$ \\
+%         $1/160$ & $1.003795$ & $1.999592$ & $3.208686$ & $3.997449$ &	$4.014280$ & $5.588236$ & $6.003132$ \\
+%     \end{tabular}
+%     \caption{Convergência dos métodos no problema modelo.}
+%     \label{tab:my_label}
+% \end{table}
+
+% \begin{table}[]
+%     \centering
+%     \begin{tabular}{c|ccccc}
+%         $h$              & E. E. & E. I. & RK22 & RK33 & RK44 \\
+%         \hline
+%         $1/40$   & $0.712071$ & $1.859924$ & $1.989241$ & $2.936490$ & $4.041771$ \\
+%         $1/80$   & $0.827102$ & $1.283719$ & $2.003212$ & $2.965188$ & $4.025951$ \\
+%         $1/160$  & $0.904085$ & $1.122329$ & $2.003873$ & $2.981701$ & $4.014280$ \\
+%         $1/320$  & $0.949289$ & $1.057240$ & $2.002516$ & $2.990612$ & $4.008214$ \\
+%         $1/640$  & $0.973898$ & $1.027730$ & $2.001404$ & $2.995243$ & $3.992159$ \\
+%     \end{tabular}
+%     \caption{Convergência dos métodos no problema modelo.}
+%     \label{tab:my_label}
+% \end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% INTRODUÇÃO
+%   Apresentar ideia dos métodos numéricos e a necessidade 
+%   no caso do Problema de N-corpos. Falar brevemente dos 
+%   tipos de métodos e o objetivo deste capítulo;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{tcc/capitulos/cap3_metodos_numericos/1.introducao}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% METODOS TRADICIONAIS
+%   Ideia e métodos de Euler;
+%   Estabilidade e afins;
+%   Exemplos de métodos:
+%       Runge-Kutta 44;
+%       Runge-Kutta-Fehlberg 45 (talvez);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{tcc/capitulos/cap3_metodos_numericos/2.metodos_tradicionais}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% METODOS SIMPLÉTICOS
+%   Ideia inicial dos métodos;
+%   Estabilidade e afins;
+%   Exemplos de métodos:
+%       Euler Simplético (1a Ordem);
+%       Velocity-Verlet (2a Ordem);
+%       Ruth3 e Ruth4 (3a e 4a Ordem);
+%       RKN551 e RKN671 (5a e 6a Ordem);
+%       SVCP8S15 e SVCP10S35 (8a e 10a Ordem).
+%   Comparacao numerica com os métodos tradicionais;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{tcc/capitulos/cap3_metodos_numericos/3.metodos_simpleticos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CORRETOR NUMÉRICO
+%   Falar sobre o corretor numerico e exemplos de sua
+%   aplicacao em problemas grandes e pequenos, alem do
+%   custo computacional e da eficiencia.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{tcc/capitulos/cap3_metodos_numericos/4.corretor_numerico}

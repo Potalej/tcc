@@ -1,0 +1,34 @@
+\section{Enunciado}
+Considere um conjunto de $N$ partículas dispostas no vácuo tridimensional ($\R^3$, digamos), cada uma com massa $m_a$, posição $\vet q_a$ e velocidade $\vet v_a$, para $a = 1, 2, ..., N$. A \textit{Lei da Gravitação Universal de Newton} fornece a seguinte função potencial suave:
+\begin{equation}\label{eq:potencial_newtoniano}
+    V = - \sum_{a < b} G \dfrac{m_a m_b}{r_{ab}},
+    \quad
+    r_{ab} = \norma{\vet q_a - \vet q_b},
+\end{equation}
+onde $G$ é a \textit{constante de gravitação universal}.
+
+A partir de $V$, define-se um campo gradiente $\vet F = - \nabla V$ que gera as seguintes equações de movimento, conforme (\ref{eq:segunda_lei_de_newton}):
+\begin{equation}\label{eq:mov_gravitacao}
+    \begin{cases}
+        \dvet q_a = \vet v_a, \\
+        \dvet v_a = \dfrac{1}{m_a} \vet F_a = \sum_{b \neq a}^N G m_b \dfrac{\vet q_b - \vet q_a}{r_{ab}^3},
+    \end{cases}
+        \quad \forall a = 1, 2, ..., N.
+\end{equation}
+
+A existência e a unicidade das soluções das equações (\ref{eq:mov_gravitacao}) munidas de um conjunto de valores iniciais é garantida localmente em $(\R^3 / \Delta) \times \R^3$ pelo \textit{Teorema de Existência e Unicidade}, cuja demonstração pode ser encontrada em \citep[34-36]{Volchan:2007}. Aqui, $\Delta$ é o \textit{conjunto singular}, dado por
+\begin{equation*}
+    \Delta = \bigcup_{1 \leq i < j \leq N} \{(\vet q_1, ..., \vet q_N) \in \R^{3N}: \vet q_i = \vet q_j \}.
+\end{equation*}
+
+Observe que também é possível representar o problema em termos de posições e momentos conjungados, tomando $\vet p_a = m_a \vet q_a, \forall a$ e escrevendo as equações de Hamilton:
+\begin{equation}
+    \begin{cases}
+        \dvet q_a = \derpar{H}{\vet p_a} = - \vet p_a / m_a, \\
+        \dvet p_a = - \derpar{H}{\vet q_a} = \sum_{b \neq a}^N G m_a m_b \dfrac{\vet q_b - \vet q_a}{r_{ab}^3},
+    \end{cases}
+\end{equation}
+onde como função Hamiltoniana toma-se a energia total:
+\begin{equation*}
+    H (\vet q, \vet p) = T(\vet p) + V(\vet q).
+\end{equation*}

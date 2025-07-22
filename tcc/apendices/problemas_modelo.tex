@@ -1,0 +1,90 @@
+\chapter{Problemas-modelo para as simulações}\label{apendice:problemas-modelo}
+
+Para testar os métodos numéricos e os resultados teóricos apresentados utilizamos dez conjuntos de valores iniciais, alguns obtidos na literatura e outros sorteados utilizando o método da seção \ref{secao:valores_iniciais}.
+
+O problema-modelo \ref{probmodelo:lemniscata} é um problema planar de três corpos com trajetórias periódicas e coincidentes, na forma de uma lemniscata. Por sua periodicidade e coincidência de órbitas, permite fácil validação de integradores de baixa ordem, tendo sido utilizado com esse propósito.
+
+O segundo problema-modelo (\ref{probmodelo:iau25}) foi um conjunto de valores amplamente utilizados no início das simulações numéricas do PNCG, tomado como o padrão internacional para que as simulações de diferentes pesquisadores pudessem ser comparadas. Trata-se de um problema de 25 corpos com massas iguais e que somam 1, velocidades nulas e com energia total $E=-0.2$. Os valores iniciais foram obtidos em \cite{Lecar1968}.
+
+Todos os outros problemas foram utilizados na seção \ref{secao:simulacao_dinamica_de_formas} para verificar o comportamento da complexidade com diferentes valores de $N$ e de $E$. Os problemas com $N \geq 20$ não têm todas as suas coordenadas apresentadas devido à grande quantidade de números, mas constam no repositório \href{https://github.com/Potalej/gravidade-fortran}{https://github.com/potalej/gravidade-fortran} \citep{potalej_gravidade-fortran}.
+
+\begin{probmodelo}[Lemniscata, \cite{Chenciner2000}]\label{probmodelo:lemniscata}
+    Massas $m_i = 1$, $i=1,2,3$. Posições e momentos na tabela \ref{tab:lemniscata}.
+    \input{tcc/tabelas_grandes/pm_1}
+\end{probmodelo}
+
+\begin{probmodelo}[IAU-25, \cite{Lecar1968}]\label{probmodelo:iau25} 
+    Massas $m_i = 0.04$, $i=1,2,...,25$. Momentos $\vet p_i = \vet 0$, $i=1,2,...,25$. Posições na tabela \ref{tab:iau25_lecar}.
+    \input{tcc/tabelas_grandes/pm_2}
+\end{probmodelo}
+
+\begin{probmodelo}[3 Corpos e constantes nulas]\label{probmodelo:3corpos_energia_nula}
+    Massas $m_1 = m_2 = m_3 = 1$, posições e momentos lineares na tabela \ref{tab:3corpos_energia0}.
+    \input{tcc/tabelas_grandes/pm_3}    
+\end{probmodelo}
+
+\begin{probmodelo}[3 Corpos, constantes nulas exceto $E>0$]\label{probmodelo:3corpos_energia_positiva}
+    Massas $m_1 = m_2 = m_3 = 1$, posições e momentos lineares na tabela \ref{tab:3corpos_energiapositiva}
+    \input{tcc/tabelas_grandes/pm_4}
+\end{probmodelo}
+
+\begin{probmodelo}[20 corpos]\label{probmodelo:20corpos_energia0}
+    Trata-se de um problema com $N=20$, todas as integrais primeiras nulas e massas diferentes. As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_20corpos}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/20corpos_E_nula.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:20corpos_energia0}.}
+        \label{fig:probmodelo_20corpos}
+    \end{figure}
+\end{probmodelo}
+
+\begin{probmodelo}[100 corpos]\label{probmodelo:100corpos_energia0}
+    Trata-se de um problema com $N=10^2$, todas as integrais primeiras nulas e massas iguais a $10^{-2}$. As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_100corpos}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/100corpos_E_nula.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:100corpos_energia0}.}
+        \label{fig:probmodelo_100corpos}
+    \end{figure}
+\end{probmodelo}
+
+\begin{probmodelo}[1000 corpos e $E=-0.25$]\label{probmodelo:1000corpos_energianegativa}
+    Trata-se de um problema com $N=10^3$, $E=-0.25$, todas as outras integrais primeiras nulas e massas iguais a $10^{-3}$.
+    As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_1000corpos_E_negativa}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/1000corpos_E_negativa.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:1000corpos_energianegativa}.}
+        \label{fig:probmodelo_1000corpos_E_negativa}
+    \end{figure}
+\end{probmodelo}
+
+\begin{probmodelo}[1000 corpos e $E=0$]\label{probmodelo:1000corpos_energianula}
+    Trata-se de um problema com $N=10^3$, todas as integrais primeiras nulas e massas iguais a $10^{-3}$. As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_1000corpos_E_nula}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/1000corpos_E_nula.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:1000corpos_energianula}.}
+        \label{fig:probmodelo_1000corpos_E_nula}
+    \end{figure}
+\end{probmodelo}
+
+\begin{probmodelo}[1000 corpos e $E=0.25$ (massas iguais)]\label{probmodelo:1000corpos_energiapositiva_1}
+    Trata-se de um problema com $N=10^3$, $E=0.25$, todas as outras integrais primeiras nulas e massas iguais a $10^{-3}$. As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_1000corpos_E_positiva_1}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/1000corpos_E_positiva_1.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:1000corpos_energiapositiva_1}.}
+        \label{fig:probmodelo_1000corpos_E_positiva_1}
+    \end{figure}
+\end{probmodelo}
+
+\begin{probmodelo}[1000 corpos e $E=0.25$ (massas diferentes)]\label{probmodelo:1000corpos_energiapositiva_2}
+    Trata-se de um problema com $N=10^3$, $E=0.25$, todas as outras integrais primeiras nulas e massas diferentes. As posições e momentos lineares podem ser visualizados na figura \ref{fig:probmodelo_1000corpos_E_positiva_2}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{tcc//img/1000corpos_E_positiva_2.png}
+        \caption{Posições e momentos do problema-modelo \ref{probmodelo:1000corpos_energiapositiva_2}.}
+        \label{fig:probmodelo_1000corpos_E_positiva_2}
+    \end{figure}
+\end{probmodelo}

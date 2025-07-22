@@ -1,0 +1,23 @@
+% * CONTEXTUALIZACAO E OBJETIVOS
+%
+%   Este sera um capitulo de aplicação. Falar brevemente de como serao
+%   feitos os testes e mais abertamente o que se quer aqui.
+%
+
+O objetivo deste último capítulo é a aplicação da teoria apresentada. Começando pela implementação computacional, discutimos a escolha da linguagem de programação Fortran e a estrutura do programa final. Passamos então para as questões de valores iniciais, apresentando o método utilizado para condicionar as integrais primeiras.
+
+A questão das colisões vem em seguida, pois existem outras formas computacionais de lidar com singularidades e aproximações intensas no PNCG além da inclusão de colisões perfeitamente elásticas.
+
+Algumas questões sobre o corretor numérico apresentado na seção \ref{secao:corretor_numerico} também precisam ser discutidas, como o seu uso e seu custo de computação associado. Além disso, este envolve a resolução de um sistema de equações (para mais de uma integral primeira em consideração), então foi necessário escolher um método de resolução adequado.
+
+Por fim, apresentamos algumas simulações de muitos corpos e com condições iniciais específicas para testar os resultados da Dinâmica de Formas enunciados na seção \ref{secao:dinamica_de_formas}.
+
+Todas as simulações e testes realizados neste trabalho foram aplicados em um computador de mesa (não dedicado) com processador \textit{Intel Core i5 CPU 760 @ 2.80GHz} e com 16 GB de RAM.
+
+% Como já explicitado, neste trabalho são consideradas os sistemas puramente gravitacionais e conservativos, além de pontuais, ou seja, cada corpo é um ponto individual. As simulações de grande porte utilizadas na astronomia e na cosmologia no geral consideram, no lugar de pontos de massa, funções de densidade $\rho$ e um campo gravitacional $\nabla \phi$, de modo que o potencial fica dado por uma equação de Poisson
+% \begin{equation*}
+%     \Delta \phi = - 4 \pi G \rho.
+% \end{equation*}
+% O campo é então discretizado através de métodos numéricos voltados para equações diferenciais parciais, e neste ponto é feita a integração numérica temporal. Isto é necessário por uma série de razões práticas, como a implementação de gases, galáxias e afins, indo bem além dos objetivos deste trabalho. [TALVEZ COLOCAR ISSO NA INTRODUÇÃO DO TRABALHO, E NÃO AQUI]
+
+% Sendo assim, existe neste trabalho a necessidade de calcular direta e rapidamente expressões não-lineares com ordem quadrática, como o potencial gravitacional, sem o uso de aproximações como o algoritmo de Barnes-Hut [TALVEZ FALAR MELHOR SOBRE TAMBÉM, SÓ PRA NÃO FICAR JOGADO]. Isso levou à escolha do Fortran como linguagem de programação para as simulações, e suas particularidades serão melhor exploradas adiante.

@@ -3,58 +3,13 @@
 % para saber mais: https://tex.stackexchange.com/q/78101/183146
 
 %% ------------------------------------------------------------------------- %%
-\chapter{Introdução}
-\label{cap:introducao}
+\section{Introdução}
+\label{sec:introducao}
 
-\textbf{
-  A introdução precisa ter um CONTEXTO, um OBJETIVO e uma HIPÓTESE.
-}
+A evolução de sistemas gravitacionais é complexa e as soluções de suas equações de movimento até então encontradas convergem lentamente, sendo inutilizáveis na prática. Nesse sentido, simular numericamente esse tipo de sistema permite visualizar aproximações das soluções e verificar hipóteses e proposições acerca de sua evolução.
 
-Desde o início da formalização da Mecânica por Isaac Newton, diversos sistemas mecânicos
-receberam maior ou menor atenção a depender de sua relevância. Um dos mais famosos é o
-chamado \textit{Problema de N-corpos} (PNC). O problema de N-corpos consiste na suposição de $N$
-partículas dispostas no vácuo e interagindo a distância através da força gravitacional ou
-da eletromagnética. A dificuldade - e a denominação \textit{problema} - aparece quando $N$ é um
-número suficientemente grande, pois resolver as equações de movimento analiticamente passa
-a ser, no geral, impossível. De fato, o sistema passa a ser um problema já em $N = 3$.
+Para isso, utilizaremos o Problema de N-Corpos (PNC) como \textit{toy-model} de sistemas gravitacionais. Estudaremos algumas de suas propriedades qualitativas e o seu uso na descrição quantizada da \textit{Dinâmica de Formas}, que é um modelo de gravidade relacionalista emergente baseado em Relatividade Geral. 
 
-Alguns resultados qualitativos a respeito de PNCs com valores iniciais específicos foram obtidos e
-descritos nas obras de Lagrange, Painlevé e Sundman, em especial acerca de colisões entre
-partículas e a existência de soluções. Além disso, algumas teorias de gravidade baseadas em
-Relatividade Geral, como a Dinâmica de Formas (\textit{Shape Dynamics}), possuem simplificações
-descritas pelo PNC e que trazem resultados gerais interessantes, como o modelo de 
-Barbour-Bertotti (BB) e sua redução dimensional do Problema.
+Numericamente, estudaremos a simulação do PNC passando pela determinação de valores iniciais, os métodos de integração numérica comuns e os simpléticos, formas de lidar com as singularidades e também as dificuldades da implementação prática das simulações utilizando as linguagens de programação Python e Fortran.
 
-Na aplicação geral do problema, como no lançamento de foguetes e sondas e no estudo de sistemas
-planetários simples, o uso de Análise Numérica para a integração das equações de movimento
-do PNC é fundamental. A infinitude de métodos existentes faz ser necessário o estudo de
-quais tipos de métodos numéricos se adequam melhor ao objetivo da simulação, que nem sempre
-vão no caminho da precisão.
-
-Simulações de grande escala, como o AbacusSummit, visam mais o panorama geral do que o local,
-ao contrário de simulações de rotas de sondas que passem por estilingues gravitacionais, como
-as Voyagers. Assim, enquanto as simulações do primeiro tipo podem se utilizar de métodos
-numéricos com menor precisão mas maior rapidez, as do segundo tipo necessitam de métodos mais
-precisos e consequentemente mais custosos.
-
-De forma geral, há uma categoria de métodos voltados para a integração numérica de sistemas
-mecânicos fechados, chamados \textit{Métodos Simpléticos} (MS). Tais métodos baseiam-se na
-estrutura simplética de sistemas mecânicos, como o PNC, e utilizam da conservação de alguns
-valores, como a energia total, para fornecer uma maior estabilidade da solução e a garantia
-de verossimilhança para simulações com um longo período de tempo. Isso é particularmente
-interessante em simulações planetárias, nas quais as órbitas são, no geral, estáveis e 
-quase periódicas.
-
-Para todo tipo de propósito, no entanto, é um desafio encontrar os métodos e ferramentas mais
-adequados, pois para cada método existe uma variedade de programas e linguagens de programação
-que se adequam em maior ou menor medida.
-
-O objetivo deste trabalho, assim, é estudar a simulação numérica do PNC e a possibilidade de
-utilizá-la na busca de resultados qualitativos do Problema. Estudaremos a formalização e alguns
-resultados interessantes já descobertos do PNC, classes de métodos numéricos e sua adequação
-ao Problema, correções numéricas a posteriori e a possibilidade de estender os resultados obtidos
-para PNCs mais elaborados, como com colisões elásticas.
-
-Ao final, pretendemos mostrar que os métodos simpléticos são os mais adequados para simulações
-de propósito geral, e que a extensão dos resultados é possível se a complexificação mantiver
-a estrutura simplética do PNC.
+Nossos objetivos serão visualizar as \textit{setas do tempo} propostas pela Dinâmica de Formas, investigar a caracterização do caos dentro do PNC e avaliar sua estabilidade, e a possibilidade de estender os resultados qualitativos e numéricos do PNC para sistemas de gravidade mais complexos, partindo do exemplo do PNC com colisões perfeitamente elásticas.

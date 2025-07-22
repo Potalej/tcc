@@ -1,0 +1,21 @@
+\chapter{Conclusão}
+
+Apresentamos neste trabalho algumas formas de simular numericamente o Problema de N-Corpos Gravitacional. Ainda que mal tenhamos saído da superfície na área de simulações numéricas, obtivemos alguns resultados.
+
+Para começar, o PNCG é um problema mecânico ideal para um primeiro mas dedicado estudo de métodos numéricos. Sua instabilidade numérica e todas as dificuldades técnicas apresentadas, como o custo computacional e as colisões, necessitam de atenção e estimulam a criatividade matemática continuamente.
+
+Qualitativamente, o capítulo \ref{capitulo:metodos_numericos} mostra nitidamente a superioridade das aproximações numéricas dos integradores simpléticos, especialmente para integrações em larga escala, demonstrando a solidez da Mecânica Hamiltoniana esperada no capítulo \ref{capitulo:revisao_mecanica}. Vale ressaltar que muita teoria já existe a respeito dos métodos simpléticos, inclusive sobre sua estabilidade através da teoria de Kolmogorov-Arnold-Moser (KAM), e trata-se de uma área em ativo desenvolvimento a qual merece atenção.
+
+Além disso, existem muitas outras formas de integração numérica que não foram tratadas, como os métodos implícitos, os com controle automático de tamanho de passo e os métodos de passo múltiplo. Para o PNCG em específico, existem esquemas de passo múltiplo utilizados na literatura que demonstram um bom desempenho para simulações astrofísicas e cosmológicas, como apresenta \cite{aarseth_gravitational_2003}.
+
+Também vimos que o corretor numérico se mostrou aplicável e que corrigir somente a energia é suficiente, embora não tenha sido possível testá-lo em larga escala. Pretendemos simular problemas com valores de $N$ maiores e em escalas de tempo mais longas que as aqui apresentadas para entender melhor a confiabilidade da correção.
+
+Quanto às colisões elásticas, também não foi possível neste tempo fazer testes em larga escala para intuir sobre sua aplicabilidade, mas é uma alternativa com potencial. Quanto ao amortecimento, o uso de diferentes valores de $\epsilon$ em diferentes simulações neste trabalho que ainda assim validavam os resultados teóricos esperados indicam a pouca influência de um $\epsilon$ suficientemente pequeno sobre os resultados qualitativos do sistema como um todo, apesar da diferença nas trajetórias individuais.
+
+O método apresentado para gerar valores iniciais se mostrou enviesado. Isso se reflete na dramática diferença entre utilizar massas $m=1/N$ e massas $m>1$ nas simulações com $E>0$ vistas na seção \ref{secao:simulacao_dinamica_de_formas}. De fato, cabe um maior estudo sobre a geração de valores iniciais para o PNCG e a devida escolha de parâmetros de modo que seja possível extrair resultados mais gerais das simulações.
+
+Quanto ao programa desenvolvido, disponível em \href{https://github.com/potalej/gravidade-fortran}{https://github.com/potalej/gravidade-fortran} \citep{potalej_gravidade-fortran}, este se mostrou bem-sucedido nas simulações embora com um custo computacional relativamente expressivo. As simulações de $N=10^3$ para grandes intervalos de futuro e passado levaram cerca de 20 minutos quando se habilitava a paralelização no \textit{hardware} disponível, gerando arquivos consideravelmente grandes e de custosa análise via Python. O uso de GPUs (\textit{Graphics Processing Unit}, unidades de processamento gráfico) é um caminho possível a se seguir para diminuir o tempo das simulações, mas não tivemos a possibilidade de testá-lo até o momento.
+
+Pudemos também visualizar os resultados fornecidos pela Dinâmica de Formas quanto às setas do tempo. A complexidade é uma forma interessante de resumir o comportamento do sistema como um todo, e também pode ser um indicador da estabilidade de um sistema de $N$-corpos para valores de $E < 0$ ainda não totalmente explorados.
+
+Em suma, a simulação numérica do Problema de N-Corpos Gravitacional é uma área matematicamente rica e profunda, e os resultados deste trabalho, como apresentado nesta seção, trouxeram ainda mais questões e novas possibilidades do que respostas. Há muitos caminhos a seguir, e simular numericamente o PNCG é uma prática que, sem dúvidas, ainda persistirá em desenvolvimento por muito tempo. 

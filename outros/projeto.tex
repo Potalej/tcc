@@ -88,7 +88,7 @@
 
 % O arquivo com os dados bibliográficos para biblatex; você pode usar
 % este comando mais de uma vez para acrescentar múltiplos arquivos
-\addbibresource{bibliografia.bib}
+\addbibresource{projeto/bibliografia.bib}
 
 % Este comando permite acrescentar itens à lista de referências sem incluir
 % uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
@@ -109,10 +109,10 @@
 \title{
     % Obrigatório nas duas línguas
     titlept={Simulação numérica do problema de N-corpos gravitacional},
-    titleen={Numerical simulation of gravitational N-body problem},
+    titleen={Numerical simulation of the gravitational N-body problem},
     % Opcional, mas se houver deve existir nas duas línguas
-    subtitlept={Projeto de trabalho de formatura},
-    subtitleen={Graduation project},
+    % subtitlept={},
+    % subtitleen={},
 }
 
 \author[masc]{Octavio Augusto Potalej}
@@ -136,11 +136,11 @@
   % É qualificação?
   %quali,
   % programa={Ciência da Computação},
-  membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
+  % membrobanca={Profª. Drª. Fulana de Tal (orientadora) -- IME-USP [sem ponto final]},
   % Em inglês, não há o "ª"
   %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
-  membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
-  membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
+  % membrobanca={Prof. Dr. Ciclano de Tal -- IME-USP [sem ponto final]},
+  % membrobanca={Profª. Drª. Convidada de Tal -- IMPA [sem ponto final]},
   % Se não houve bolsa, remova
   %
   % Norma sobre agradecimento por auxílios da FAPESP:
@@ -218,9 +218,9 @@
 % Aqui vai o conteúdo principal do trabalho, ou seja, os capítulos que compõem
 % a dissertação/tese. O comando mainmatter reinicia a contagem de páginas,
 % modifica a numeração para números arábicos e ativa a contagem de capítulos.
-\mainmatter
 
-\pagestyle{mainmatter}
+\mainmatter
+% \pagestyle{mainmatter}
 
 % Espaçamento simples
 \singlespacing
@@ -228,84 +228,17 @@
 \input{projeto/01-introducao}
 \input{projeto/02-metodos}
 \input{projeto/03-plano-de-trabalho}
-\input{projeto/04-bibliografia}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES E ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Um apêndice é algum conteúdo adicional de sua autoria que faz parte e
-% colabora com a ideia geral do texto mas que, por alguma razão, não precisa
-% fazer parte da sequência do discurso; por exemplo, a demonstração de um
-% teorema intermediário, as perguntas usadas em uma pesquisa qualitativa etc.
-%
-% Um anexo é um documento que não faz parte da tese (em geral, nem é de sua
-% autoria) mas é relevante para o conteúdo; por exemplo, a especificação do
-% padrão técnico ou a legislação que o trabalho discute, um artigo de jornal
-% apresentando a percepção do público sobre o tema da tese etc.
-%
-% Os comandos appendix e annex reiniciam a numeração de capítulos e passam
-% a numerá-los com letras. "annex" não faz parte de nenhuma classe padrão,
-% foi criado para este modelo. Se o trabalho não tiver apêndices ou anexos,
-% remova estas linhas.
-%
-% Diferentemente de \mainmatter, \backmatter etc., \appendix e \annex não
-% forçam o início de uma nova página. Em geral isso não é importante, pois
-% o comando seguinte costuma ser "\chapter", mas pode causar problemas com
-% a formatação dos cabeçalhos. Assim, vamos forçar uma nova página antes
-% de cada um deles.
-
-%%%% Apêndices %%%%
-
-\makeatletter
-\if@openright\cleardoublepage\else\clearpage\fi
-\makeatother
-
-\pagestyle{appendix}
-
-\appendix
-
-% \addappheadtotoc acrescenta a palavra "Apêndice" ao sumário; se
-% só há apêndices, sem anexos, provavelmente não é necessário.
-\addappheadtotoc
-
-\input{conteudo/apendice-exemplo-pseudocodigo}
-\par
-
-%%%% Anexos %%%%
-
-\makeatletter
-\if@openright\cleardoublepage\else\clearpage\fi
-\makeatother
-
-\pagestyle{appendix} % repete o anterior, caso você não use apêndices
-
-\annex
-
-% \addappheadtotoc acrescenta a palavra "Anexo" ao sumário; se
-% só há anexos, sem apêndices, provavelmente não é necessário.
-\addappheadtotoc
-
-\input{conteudo/anexo-exemplo-faq}
-\par
-
+% \input{projeto/04-bibliografia}
 
 %%%%%%%%%%%%%%% SEÇÕES FINAIS (BIBLIOGRAFIA E ÍNDICE REMISSIVO) %%%%%%%%%%%%%%%%
 
 % O comando backmatter desabilita a numeração de capítulos.
-\backmatter
 
-\pagestyle{backmatter}
-
-% Espaço adicional no sumário antes das referências / índice remissivo
-\addtocontents{toc}{\vspace{2\baselineskip plus .5\baselineskip minus .5\baselineskip}}
-
+% \nocite{*}
 % A bibliografia é obrigatória
-
 \printbibliography[
   title=\refname\label{bibliografia}, % "Referências", recomendado pela ABNT
   %title=\bibname\label{bibliografia}, % "Bibliografia"
-  heading=bibintoc, % Inclui a bibliografia no sumário
+  % heading=bibintoc, % Inclui a bibliografia no sumário
 ]
-
-\printindex % imprime o índice remissivo no documento (opcional)
-
 \end{document}

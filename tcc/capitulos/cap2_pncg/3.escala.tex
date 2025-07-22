@@ -1,0 +1,176 @@
+\section{Questões de escala}
+Nas simulações numéricas diretas de gravitação (ou seja, integrando diretamente as equações de movimento do PNCG), uma questão fundamental que aparece é a da escolha de unidades de medida padrão, de modo a garantir que diferentes simulações possam ser comparáveis. Alguns padrões foram definidos por \cite{aarseth_gravitational_2003} e são aplicados nos códigos NBODY \citep{NBODY}, e serão vistos com mais cuidados na seção de simulação. Para fins teóricos, a princípio, é possível obter algumas relações acerca da medida dos sistemas de partículas e das órbitas.
+
+Para começar, para cada problema de valor inicial do PNCG, é possível obter uma família infinita de órbitas idênticas a menos de um fator de escala anisotrópico. Isso significa que através de uma aplicação linear contínua, soluções são enviadas em soluções.
+
+\begin{theorem}[Similaridade dinâmica]\label{teorema:similaridade_dinamica}
+    As equações de movimento do PNCG satisfazem a similaridade dinâmica: se $(\vet q(t), \vet p(t))$ são órbitas do problema de N-corpos, o redimensionamento anisotrópico
+    \begin{equation*}
+        \tilde{\vet q}(\tilde t) = \alpha \vet q (t),
+        \quad
+        \tilde t = \alpha^{3/2} t,
+        \quad
+        \alpha > 0
+    \end{equation*}
+    das distâncias e do tempo newtoniano leva soluções $(\vet q(t), \vet p(t))$ em soluções $(\tilde{\vet q}(\tilde t), \tilde{\vet p}(\tilde t))$.
+\end{theorem}
+\begin{Proof}
+    Considere um potencial geral homogêneo de grau $k$ e a mudança de coordenadas $\tilde{\vet q_a} = \alpha \vet q_a$, que implica em $\tilde t = \beta t$, para algum $\beta$ e então $\tilde{\vet p_a} = \alpha \vet p_a / \beta$. Com as novas coordenadas, temos a energia total
+    \begin{equation*}
+        H(\beta t, \alpha \vet q, \alpha \vet p / \beta) = \dfrac{\alpha^2}{\beta^2} T(\vet p) + \alpha^k V(\vet q).
+    \end{equation*}
+    Os sistemas são similarmente dinâmicos se $\beta$ for tal que podemos escrever $H(\tilde t, \tilde{\vet q}, \tilde{\vet p}) = \alpha^k H(t, \vet q, \vet p)$ (pois soluções são enviadas em soluções pelo redimensionamento). Decorre então que
+    \begin{equation*}
+        \alpha^k = \dfrac{\alpha^2}{\beta^2} \Rightarrow \beta = \alpha^{1-k/2}.
+    \end{equation*}
+    No PNCG temos que $k=-1$, e portanto $\tilde{\vet q_a} = \alpha \vet q_a$, $\tilde{\vet p_a} = \alpha^{-1/2} \vet p_a$ e $\tilde t = \alpha^{3/2} t$.
+\end{Proof}
+
+Observe que num problema de 2 corpos no qual um se encontra fixado e o outro sob uma órbita elíptica, se tomamos a distância $\ell$ entre os corpos e aplicamos a similaridade dinâmica obtemos:
+\begin{equation*}
+    \tilde \ell = \alpha \ell \Rightarrow \tilde \ell / \ell  = \alpha.
+\end{equation*}
+Isso significa que
+\begin{equation*}
+    \tilde t = \alpha^{3/2} t \Rightarrow \left(\dfrac{\tilde t}{t}\right)^2 = \left(\dfrac{\tilde \ell}{\ell}\right)^3,
+\end{equation*}
+o que é a chamada \textit{Terceira Lei de Kepler}. O que o teorema \ref{teorema:similaridade_dinamica} faz, dessa forma, é mostrar que é possível ignorar as escalas, em certo sentido, não apenas para $N=2$ mas para qualquer valor de $N$. Isso é explorado na seção \ref{secao:dinamica_de_formas}.
+
+Além de redimensionar as órbitas, é particularmente interessante medir sua distância em função do tempo tendo em conta que aproximações tendem a gerar instabilidades numéricas. Uma medida para isso é dada pelo \textit{momento de inércia do centro de massas}.
+
+\begin{definition}[Momento de inércia]\label{def:momento_inercia}
+    O momento de inércia do centro de massas do PNCG é dado por:
+    \begin{equation*}
+        I 
+        = \sum_{a=1}^{N} m_a \norma{\vet q_a - \vet q_{cm}}^2
+        = \dfrac{1}{M} \sum_{a < b} m_a m_b \norma{\vet q_a - \vet q_b}^2
+        =  R^2.
+    \end{equation*}
+\end{definition}
+
+O observável $I$ pode ser interpretado como um tipo de \textit{variância} (no sentido estatístico) do sistema, uma vez que mede a dispersão das partículas em relação a um referencial (nesse caso, o centro de massas), sendo $R$, por sua vez, o \textit{desvio padrão}. Na perspectiva do sistema como um todo, $I$ mede a dilatação espacial. Sua taxa de variação em relação ao tempo fornece a quantidade de movimento (ou \textit{momento}, conforme nomeado por \cite{Barbour2003_scale_invariant_gravity}) da dilatação do sistema.
+
+\begin{definition}[Momento de dilatação]
+    O momento de dilatação do PNCG é proporcional à derivada do momento de inércia:
+    \begin{equation*}
+        D := \dfrac{1}{2} \der{I}{t} = \sum_{a=1}^{N} \vet q_a \cdot \vet p_a.
+    \end{equation*}
+\end{definition}
+
+A variação do momento de dilatação oferece uma relação fundamental do PNCG, chamada \textit{identidade de Lagrange-Jacobi}.
+
+\begin{theorem}[Identidade de Lagrange-Jacobi]\label{teorema:lagrange_jacobi}
+    A segunda derivada do momento de inércia do PNCG é dada por:
+    \begin{equation}
+        \ddot I = 4 E - 2 V.
+    \end{equation}
+    No geral, se $V$ é homogêneo de grau $k$, então
+    \begin{equation}
+        \ddot I = 4 E - 2 (2 + k) V.
+    \end{equation}
+\end{theorem}
+\begin{lemma}[Teorema de Euler para funções homogêneas]\label{lema:euler}
+    Considere uma função $f$ homogênea de grau $k$ em um aberto $A \subseteq \R^n$. Então $k f(\vet x) = \prodint{x}{\nabla f(\vet x)}$, para todo $\vet x \in A$.
+\end{lemma}
+\begin{Proof}
+    Como $f$ é homogênea de grau $k$, então
+    \begin{equation*}
+        f(\lambda \vet x) = \lambda^k f(\vet x).
+    \end{equation*}
+    Tomando $\vet u = \lambda \vet x$ e derivando dos dois lados em relação a $\lambda$, temos:
+    \begin{equation*}
+        \sum_{i=1}^n \derpar{f}{u_i} \der{u_i}{\lambda} = \sum_{i=1}^n x_i \derpar{f}{u_i} = k \lambda^{k-1} f(\vet x).
+    \end{equation*}
+    Em particular, tomando $\lambda = 1$ (pois $\lambda$ é qualquer), tem-se:
+    \begin{equation*}
+        k f(\vet x) = \prodint{\vet x}{\nabla f(\vet x)}.
+    \end{equation*}
+\end{Proof}
+\begin{Proof}
+    (do teorema). Uma vez que $\dot I = 2D$, basta derivar novamente:
+    \begin{equation*}
+        \ddot I (t) = 2 \der{D}{t} = 2 \sum_{a=1}^N \dvet q_a \cdot \vet p_a + 2 \sum_{a=1}^{N} \vet q_a \cdot \dvet p_a = 4 T - 2 \sum_{a=1}^{N} \prodint{\vet q_a}{\nabla_{\vet q_a} V}.
+    \end{equation*}
+    Se $V$ é homogêneo de grau $k$, então podemos aplicar o lema \ref{lema:euler}:
+    \begin{equation*}
+        \ddot I(t) = 4 T - 2 k V = 4 E - 2 (2+k) V,
+    \end{equation*}
+    sendo $k = -1$ o caso newtoniano.
+\end{Proof}
+
+A Identidade de Lagrange-Jacobi é útil uma vez que $-2V$ é um valor necessariamente positivo, o que significa que a dilatação do sistema de partículas depende fortemente da energia total do sistema, que é constante. Escolher valores iniciais de modo a obter $E \geq 0$, por exemplo, implica que $\ddot I (t) > 0$, então $I(t)$ assume um formato côncavo para cima (com um mínimo global), e portanto o sistema possui um momento de contração máxima seguido de uma expansão indefinida, tanto do ponto de vista em que o tempo $t$ cresce quanto para quando $t$ decresce. Isso, novamente, é utilizado pela Dinâmica de Formas e é explorado com mais detalhes na seção \ref{secao:dinamica_de_formas}.
+
+Uma outra relação importante no PNCG fornece estimativas para as separações máximas e mínimas dos corpos a partir de $R$ e de $V$, respectivamente.
+
+\begin{theorem}\label{teorema:distanciamento}
+    Sejam $q_{min} = \min_{j \neq k} q_{jk}$ e $q_{max} = \max_{j \neq k} q_{jk}$ os distanciamentos mínimo e máximo entre as partículas, respectivamente, $m_0 = \min_a m_a$ e $M = \sum_{a=1}^{N} m_a$. Tem-se as seguintes relações:
+    \begin{equation*}
+        R \sqrt{\dfrac{2}{M}} \leq q_{max} \leq \dfrac{R \sqrt{M}}{m_0},
+        \quad
+        - \dfrac{G m_0^2}{V} \leq q_{min} \leq - \dfrac{G M^2}{2 V}.
+    \end{equation*}
+\end{theorem}
+\begin{Proof}
+     Começando por $q_{max}$, podemos escrever que
+    \begin{equation}
+        \dfrac{m_0^2}{2 M} q_{max}^2
+        \leq
+        \dfrac{m_0^2}{2 M} \sum_{a < b} r_{ab}^2
+        \leq
+        \dfrac{1}{2} I,
+    \end{equation}
+    e, analogamente:
+    \begin{equation}
+    \dfrac{1}{2} I \leq \left( \dfrac{1}{2 M} \sum_{a < b} m_a m_b \right) q_{max}^2 
+    = \left( \dfrac{1}{4 M} \sum_{b=1}^{N} \sum_{a=1}^{N} m_a m_b \right ) q_{max}^2
+    = \dfrac{M}{4} q_{max}^2. 
+    \end{equation}
+    Isso significa que
+    \begin{equation}
+        \dfrac{m_0^2}{M} q_{max}^2 \leq I \leq \dfrac{M}{2} q_{max}^2 
+        \Rightarrow
+        R \sqrt{\dfrac{2}{M}} \leq q_{max} \leq \dfrac{R\sqrt{M}}{m_0}.
+    \end{equation}
+
+    Da mesma forma, como $\frac{1}{2} M^2 \geq \sum_{a<b} m_a m_b$, temos que:
+    \begin{equation}
+        -V \leq \dfrac{G}{q_{min}} \sum_{a < b} m_a m_b \leq \dfrac{G}{2q_{min}} \sum_{b=1}^{N} \sum_{a=1}^{N} m_a m_b = \dfrac{G M^2}{2 q_{min}},
+    \end{equation}
+    e, ademais, vale que
+    \begin{equation}
+        -V \geq G \dfrac{m_a m_b}{r_{ab}} \geq \dfrac{G m_0^2}{r_{ab}}, \quad \forall 1 \leq a,b \leq N,
+    \end{equation}
+    e como para algum $a$ e $b$ vale que $r_{ab} = q_{min}$, temos que
+    \begin{equation}
+        -V \geq \dfrac{G m_0^2}{q_{min}}.
+    \end{equation}
+    Obtemos a relação:
+    \begin{equation}
+        - \dfrac{G M^2}{2 q_{min}} \leq V \leq - \dfrac{G m_0^2}{q_{min}},
+    \end{equation}
+    o que oferece a relação buscada (pois $V < 0$):
+    \begin{equation}
+        - \dfrac{G m_0^2}{V} \leq q_{min} \leq - \dfrac{G M^2}{2 V}.
+    \end{equation}
+\end{Proof}
+
+Também é possível limitar o comportamento do momento angular usando a relação de Lagrange-Jacobi.
+
+\begin{theorem}[Desigualdade de Sundman]
+    Considere o momento angular total $\vet J$, o momento de inércia $I$ e a energia total $H$. Então
+    \begin{equation*}
+        \norma{\vet J}^2 \leq I (\ddot I - 2 H).
+    \end{equation*}
+\end{theorem}
+\begin{Proof}
+    Começamos pela desigualdade de Cauchy-Schwarz:
+    \begin{align*}
+        \norma{\vet J} 
+        &\leq \sum_{a=1}^{N} m_a \norma{\vet q_a \times \vet p_a m_a^{-1}}
+        \leq \sum_{a=1}^{N} m_a \norma{\vet q_a} \norma{\vet p_a m_a^{-1}} \\
+        &= \sum_{a=1}^{N} (\sqrt{m_a} \norma{\vet q_a})(\sqrt{m_a}\norma{\vet p_a m_a^{-1}})
+        \leq \sqrt{\sum_{a=1}^{N} m_a \norma{\vet q_a}^2} \sqrt{\sum_{a=1}^{N} m_a^{-1} \norma{\vet p_a}^2} \\
+        &= \sqrt{2 I T}.
+    \end{align*}
+    Pela relação de Lagrange-Jacobi, $2T = \ddot I - 2 H$, então obtém-se o esperado.
+\end{Proof}

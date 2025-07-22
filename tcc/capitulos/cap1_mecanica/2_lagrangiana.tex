@@ -1,0 +1,86 @@
+\subsection{Ação e Lagrangianos}
+Na modelagem obtida, as trajetórias dos objetos são descritas localmente, pois as equações de movimento muitas vezes não possuem soluções para todo $t \in \R$, estando no geral definidas apenas na vizinhança do instante inicial.
+
+Para movimentos em circuitos definidos em espaços conexos, existe ao menos uma curva ligando os pontos inicial e final. O critério para determinar qual curva corresponde a um dado conjunto de valores iniciais é dado a partir de uma métrica e, com ela, a atribuição de um valor real a cada curva $\gamma(t) = (\vet q(t), \vet v(t))$ em $[t_0,t_f]$, o que pode ser feito da seguinte maneira:
+\begin{equation}
+    S(\gamma) = \int_{t_0}^{t_f} L(\gamma(t)) dt = \int_{t_0}^{t_f} L(\vet q(t), \vet v(t)) dt.
+\end{equation}
+
+Aqui $S$ é um funcional chamado \textit{ação} e $L$ é uma função que a princípio pode ser qualquer. Tomando $L(\vet q(t), \vet v(t)) = \sqrt{1 + \vet v(t)}$, por exemplo, $S$ mede o comprimento de $\gamma$.
+
+Podemos definir uma \textit{aproximação} ou \textit{deformação} $\tilde \gamma$ de $\gamma$ como $\tilde \gamma (t) = \gamma(t) + h(t)$, para alguma curva $h$ definida no mesmo espaço de $\gamma$.
+
+\begin{definition}
+    Um funcional $\Phi$ é dito \textit{diferenciável} se $\Phi(\gamma + h) - \Phi(\gamma) = F + R$, onde $F$ depende linearmente de $h$ e $R(h, \gamma) = O(h^2)$, no sentido de que, para $|h| < \epsilon$ e $|dh/dt| < \epsilon$, temos $|R| < C \epsilon^2$. A parte linear $F(h)$ é chamada de \textit{diferencial}.
+\end{definition}
+
+\begin{theorem}\label{teorema:derivada_acao}
+    O funcional de ação é diferenciável, e seu diferencial é dado por
+    \begin{equation}
+        F(h) = \int_{t_0}^{t_f} \left[ \derpar{L}{\vet q} - \der{}{t} \derpar{L}{\vet v} \right] h dt
+    \end{equation}
+\end{theorem}
+\begin{Proof}
+    Temos que:
+    \begin{align*}
+        S(\gamma + h) - S(\gamma) 
+        &= \int_{t_0}^{t_f} [L(\vet q + h, \vet v + \dot h) - L(\vet q, \vet v)] dt \\
+        &= \int_{t_-0}^{t_f} \left[\derpar{L}{\vet q} h + \derpar{L}{\vet v} \dot h\right] dt + O(h^2) = F(h) + R,
+    \end{align*}
+    pois
+    \begin{equation*}
+        L(\vet q + h, \vet v + \dot h) = L(\vet q, \vet v) + \prodint{(h, \dot h)}{\nabla L(\vet q, \vet v)} + O(h^2).
+    \end{equation*}
+    Integrando por partes, obtemos:
+    \begin{equation*}
+        \int_{t_0}^{t_f} \derpar{L}{\vet v} \dot h dt =
+        - \int_{t_0}^{t_f} h \der{}{t} \left(\derpar{L}{\vet v}\right) dt + \left(h \derpar{L}{\vet v} \right)\bigg\rvert_{t_0}^{t_f}.
+    \end{equation*}
+    Uma vez que $h(t_0) = h(t_f) = 0$ (pela definição de deformação), então obtemos o esperado.
+\end{Proof}
+
+A partir do conceito de diferencial, é intuitiva a definição de \textit{extremos} ou \textit{curvas críticas}, análoga ao conceito de \textit{pontos críticos} de funções, sendo ``pontos'' (em um espaço de funções) que maximizam ou minimizam o funcional.
+
+\begin{definition}
+    Um \textit{extremo} de um funcional diferenciável $\Phi(\gamma)$ é uma curva $\gamma$ tal que $F(h, \gamma) = 0$, para todo $h$.
+\end{definition}
+
+\begin{theorem}
+    A curva $\gamma$ é um extremo de $S$ se, e somente se,
+    \begin{equation}\label{eq:euler_lagrange}
+        \derpar{L}{\vet q} - \der{}{t}\left(\derpar{L}{\vet v}\right) = 0, \quad \forall t \in [t_0, t_f].
+    \end{equation}
+\end{theorem}
+\begin{Proof}
+    Pelo teorema \ref{teorema:derivada_acao}, $F(h) = 0$ se e somente se $h = 0$ ou
+    \begin{equation*}
+        \derpar{L}{\vet q} - \der{}{t}\left(\derpar{L}{\vet v}\right) = 0.
+    \end{equation*}
+    Uma vez que $h \neq 0$ (pois é uma deformação), temos o esperado.
+\end{Proof}
+
+A equação (\ref{eq:euler_lagrange}) é chamada de \textit{Equação de Euler-Lagrange}. Essa equação, munida do \textit{Princípio de Hamilton}, caracteriza o movimento na mecânica lagrangiana.
+
+\begin{theorem}[Princípio de Hamilton]
+    A 2ª Lei de Newton em (\ref{eq:segunda_lei_de_newton}) coincide com extremos do funcional de ação
+    \begin{equation*}
+        S(\gamma) = \int_{t_0}^{t_f} L \ dt,
+    \end{equation*}
+    onde $L = T - V$ é a diferença entre as energias cinética e potencial.
+\end{theorem}
+\begin{Proof}
+    Basta derivar:
+    \begin{equation*}
+        \derpar{L}{\vet q} = - \derpar{V}{\vet q},
+        \quad
+        \derpar{L}{\vet v} = \derpar{}{\vet v}\left(\dfrac{1}{2} m \vet v^2 \right) = m \vet v
+        \Rightarrow
+        \der{}{t}(m \vet v) = -\derpar{V}{\vet q} = F(\vet q).
+    \end{equation*}
+\end{Proof}
+
+\begin{definition}\label{def:generalizados}
+    A função $L(\vet q, \vet v) = \frac{1}{2} m \vet v^2 - V$ é a \textbf{função lagrangiana} ou \textbf{lagrangiano} do sistema, $\vet q$ são as \textbf{coordenadas generalizadas}, $\vet v$ são as \textbf{velocidades generalizadas}, $\partial L / \partial \vet v = \vet p$ são os \textbf{momentos generalizados} e $\partial L / \partial \vet q$ são as \textbf{forças generalizadas}.
+\end{definition}
+
+A mecânica lagrangiana é amplamente utilizada para modelar diversos problemas, desde sistemas mecânicos simples com vínculos até o próprio Modelo Padrão de partículas. No entanto, para o PNCG há uma formulação mais interessante que é a \textit{mecânica hamiltoniana}. Ainda assim, o conceito de ação é relevante, como por exemplo na formulação da \textit{Dinâmica de Formas}, apresentada brevemente na seção \ref{secao:dinamica_de_formas}.

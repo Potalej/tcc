@@ -134,7 +134,7 @@
   \renewcommand\@institutionBlockText{%
     Universidade de São Paulo\\
     Instituto de Matemática e Estatística\\
-    Bacharelado em Ciência da Computação%
+    Bacharelado em Matemática Aplicada e Computacional%
   }%
   \renewcommand\@provisionalFrontmatterText{%
     \iftoggle{@qualificacao}{%
@@ -449,6 +449,10 @@
   \toggletrue{@tcc}
 }
 
+\NewDocumentCommand{\@fichacatalografica}{+m}{
+    \tl_gset:Nn \@catalogingData {#1}
+}
+
 % Defaults quando o usuário não define alguma dessas variáveis.
 % Não podemos usar \title ou \author aqui porque esses comandos
 % dependem de hyperref, que ainda não foi carregada.
@@ -695,7 +699,8 @@
   \onehalfspacing
 
   \@IMEcover
-  \iftoggle{@tcc}{}{\@IMEtitlePage}
+  % \iftoggle{@tcc}{}{\@IMEtitlePage} % oxe
+  \@IMEtitlePage
   \@IMEversoPage
 
   \egroup

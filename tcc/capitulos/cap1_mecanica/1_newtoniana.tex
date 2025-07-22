@@ -1,0 +1,63 @@
+\subsection{Equações de movimento na mecânica newtoniana}
+Na mecânica newtoniana, os objetos são descritos matematicamente a partir de dois referenciais absolutos: o espaço e o tempo. As equações de movimento que parametrizam tais objetos são dadas pela 2ª Lei de Newton.
+
+\begin{definition}[2ª Lei de Newton]
+    Um objeto de massa $m > 0$, posição inicial $\vet q_0 \in M \subseteq \R^n$ e sujeito a um campo de forças $\vet F: I \times M \to M$, $I \subseteq \R$, tem sua trajetória $\vet q: I \subseteq \R \to M$ descrita pelo seguinte Problema de Cauchy:
+    \begin{equation}\label{eq:segunda_lei_de_newton}
+        \begin{cases}
+            m \ddvet q (t) = \vet F(t, \vet q(t)), \forall t \in I, \\
+            \vet q(t_0) = \vet q_0, \dvet q(t_0) = \dvet q_0, \ t_0 \in I.
+        \end{cases}
+    \end{equation}
+\end{definition}
+
+No caso do PNCG, tratado com detalhes no capítulo \ref{capitulo:pncg}, o campo de forças depende somente da posição, e como as equações são autônomas (isto é, não dependem explicitamente do tempo), escrevemos na forma de notação reduzida:
+\begin{equation}
+    m \ddvet q = F(\vet q),
+\end{equation}
+ou, ainda, tomando $\vet v(t) \in T_{\vet q(t)} M$, onde $T_{\vet q(t)} M$ é o espaço tangente a $M$ em $\vet q(t)$\footnote{Os conceitos de espaços e fibrados tangente e cotangente são melhor explorados na seção \ref{subsecao:k-formas}. No momento, para visualizar $TM$ qualquer basta pensar em uma derivada temporal.}, e definindo $\vet v_0 = \vet v(t_0)$, podemos escrever na seguinte forma:
+\begin{equation}
+    \begin{cases}
+        \dvet q = \vet v, \\
+        \dvet v = \frac{1}{m} \vet F(\vet q), \\
+        \vet q(t_0) = \vet q_0, \vet v(t_0) = \vet v_0.
+    \end{cases}
+\end{equation}
+
+Nos sistemas newtonianos, um conceito que aparece naturalmente é a energia total.
+
+\begin{definition}[Função potencial]
+    Quando $\vet F$ é um campo gradiente, isto é, existe uma função suave $V:M \to \R$ tal que $\vet F = - \nabla V$, dizemos que $V$ é uma \textbf{função potencial} do sistema.
+\end{definition}
+
+\begin{definition}[Energia total]
+    A energia total $E$ de um sistema newtoniano com função potencial $V$ é dada por
+    \begin{equation}\label{eq:energia_total}
+        E(t, \vet q, \vet v) = \dfrac{1}{2} m \norma{\vet v}^2 + V(\vet q),
+    \end{equation}
+    onde $\frac{1}{2} m \norma{\vet v}^2$ é chamada de \textbf{energia cinética} e a função potencial é chamada de \textbf{energia potencial}.
+\end{definition}
+
+A energia total, quando não depende explicitamente do tempo e o campo é fechado (ou seja, não há forçantes), possui a propriedade de ser uma \textit{integral primeira} do sistema, isto é, é constante em relação ao tempo.
+
+\begin{definition}[Integral primeira]\label{def:integral_primeira}
+    Um observável $f$ (uma função que depende de $t$, $\vet q$ e $\vet v$) é dito uma \textbf{integral primeira} se for pelo menos $\continuo^1$ e
+    \begin{equation}
+        \der{}{t} f (t, \vet q(t), \vet v(t)) = 0, \forall t \in I.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}\label{teorema:energia_total}
+    A energia total $E(t, \vet q(t), \vet v(t))$ de um sistema newtoniano é uma integral primeira.
+\end{theorem}
+\begin{Proof}
+    Basta derivar:
+    \begin{align*}
+        \der{}{t} E(t, \vet q(t), \vet v(t))
+        &= \dfrac{1}{2} m \der{}{t}(\norma{\vet v}^2) + \der{}{t} V(\vet q(t))  \\
+        &= \dfrac{1}{2} m 2 \prodint{\vet v}{\dvet v} + \prodint{\nabla V}{\vet v} \\
+        &= \prodint{\vet v}{\vet F} - \prodint{\vet F}{\vet v} = 0.
+    \end{align*}
+\end{Proof}
+
+Isso significa que a partir de um par de valores iniciais $(\vet q_0, \vet v_0)$, obtém-se a energia total de toda a trajetória. Analiticamente, quando um sistema em $\R^n$ possui $k$-integrais primeiras não-triviais, é possível remodelar o sistema para trabalhar em um espaço reduzido $\R^{n-k}$ \citep[93-94]{de_queiroz_barros_mecanica_1995}. Já numericamente, isso é interessante do ponto de vista da precisão numérica, pois, uma vez que a energia deve se manter constante durante a trajetória, sua variação numérica é uma forma de mensurar os erros nas aproximações.

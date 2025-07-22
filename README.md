@@ -1,5 +1,15 @@
 # IME/USP LaTeX Template
 
+Usei no tcc, bom deixar guardado. Para compilar no Windows é só rodar:
+
+```
+latexmk -pdf tese.tex
+```
+
+O abaixo é o README original.
+
+---
+
 A LaTeX template for Masters and PhD/Doctorate dissertations/theses
 according to IME/USP guidelines. Note that the actual formatting of
 the document (fonts, cover layout, spacing etc.) is *not* mandatory;

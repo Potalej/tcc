@@ -1,0 +1,103 @@
+
+% O arquivo com os dados bibliográficos para biblatex; você pode usar
+% este comando mais de uma vez para acrescentar múltiplos arquivos
+\addbibresource{tcc/bibliografia/bibliografia.bib} % gerais
+\addbibresource{tcc/bibliografia/numerico.bib}     % metodos numericos
+\addbibresource{tcc/bibliografia/ncorpos.bib}      % n-corpos
+\addbibresource{tcc/bibliografia/mecanica.bib}     % mecanica
+\addbibresource{tcc/bibliografia/sd.bib}           % dinamica de formas
+
+% Este comando permite acrescentar itens à lista de referências sem incluir
+% uma referência de fato no texto (pode ser usado em qualquer lugar do texto)
+%\nocite{bronevetsky02,schmidt03:MSc, FSF:GNU-GPL, CORBA:spec, MenaChalco08}
+% Com este comando, todos os itens do arquivo .bib são incluídos na lista
+% de referências
+%\nocite{*}
+
+% É possível definir como determinadas palavras podem (ou não) ser
+% hifenizadas; no entanto, a hifenização automática geralmente funciona bem
+\babelhyphenation{documentclass latexmk soft-ware} % todas as línguas
+\babelhyphenation[brazilian]{Fu-la-no}
+\babelhyphenation[english]{what-ever}
+
+% Estes comandos definem o título e autoria do trabalho e devem sempre ser
+% definidos, pois além de serem utilizados para criar a capa, também são
+% armazenados nos metadados do PDF.
+\title{
+    % Obrigatório nas duas línguas
+    titlept={Simulação numérica do problema de N-corpos gravitacional},
+    titleen={Numerical simulation of gravitational N-body problem},
+    % Opcional, mas se houver deve existir nas duas línguas
+    subtitlept={},
+    subtitleen={},
+}
+
+\author[masc]{Octavio Augusto Potalej}
+
+% Para TCCs, este comando define o supervisor
+\orientador[masc]{Profº. Dr. Eduardo Colli}
+
+% Se não houver, remova; se houver mais de um, basta
+% repetir o comando quantas vezes forem necessárias
+% \coorientador{Prof. Dr. Ciclano de Tal}
+% \coorientador[fem]{Profª. Drª. Beltrana de Tal}
+
+% A página de rosto da versão para depósito (ou seja, a versão final
+% antes da defesa) deve ser diferente da página de rosto da versão
+% definitiva (ou seja, a versão final após a incorporação das sugestões
+% da banca).
+\defesa{
+  nivel=tcc, % mestrado, doutorado ou tcc
+  % É a versão para defesa ou a versão definitiva?
+  definitiva,
+  % É qualificação?
+  %quali,
+  programa={Matemática Aplicada e Computacional},
+  membrobanca={Prof. Dr. Eduardo Colli (orientador) -- IME-USP},
+  % Em inglês, não há o "ª"
+  %membrobanca{Prof. Dr. Fulana de Tal (advisor) -- IME-USP [sem ponto final]},
+  membrobanca={Prof. Dr. Clodoaldo Grotta Ragazzo -- IME-USP},
+  membrobanca={Prof. Dr. Claudio Hirofume Asano  -- IME-USP},
+  % Se não houve bolsa, remova
+  %
+  % Norma sobre agradecimento por auxílios da FAPESP:
+  % https://fapesp.br/11789/referencia-ao-apoio-da-fapesp-em-todas-as-formas-de-divulgacao
+  %
+  % Norma sobre agradecimento por auxílios da CAPES (Portaria 206,
+  % de 4 de Setembro de 2018):
+  % https://www.in.gov.br/materia/-/asset_publisher/Kujrw0TZC2Mb/content/id/39729251/do1-2018-09-05-portaria-n-206-de-4-de-setembro-de-2018-39729135
+  %
+  %apoio={O presente trabalho foi realizado com apoio da Coordenação
+  %       de Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Código de Financiamento 001}, % o código é sempre 001
+  %
+  %apoio={This study was financed in part by the Coordenação de
+  %       Aperfeiçoamento\\ de Pessoal de Nível Superior -- Brasil
+  %       (CAPES) -- Finance Code 001}, % o código é sempre 001
+  %
+  %apoio={Durante o desenvolvimento deste trabalho, o autor recebeu\\
+  %       auxílio financeiro da FAPESP -- processo nº aaaa/nnnnn-d},
+  %
+  %apoio={During the development if this work, the author received\\
+  %       financial support from FAPESP -- grant \#aaaa/nnnnn-d},
+  %
+  % apoio={Durante o desenvolvimento deste trabalho o autor
+  %        recebeu auxílio financeiro da XXXX},
+  local={São Paulo},
+  data=2024-12-13, % YYYY-MM-DD
+  % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
+  % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
+  % correspondente (o sistema insere automaticamente o texto da licença).
+  % Se quiser estabelecer regras diferentes para o uso de seu trabalho,
+  % converse com seu orientador e coloque o texto da licença aqui, mas
+  % observe que apenas TCCs sob alguma licença Creative Commons serão
+  % acrescentados ao BDTA. Se você tem alguma intenção de publicar o
+  % trabalho comercialmente no futuro, sugerimos a licença CC-BY-NC-ND.
+  direitos={CC-BY}, % Creative Commons Attribution 4.0 International License
+  %direitos={Autorizo a reprodução e divulgação total ou parcial
+  %          deste trabalho, por qualquer meio convencional ou
+  %          eletrônico, para fins de estudo e pesquisa, desde que
+  %          citada a fonte.},
+  % Isto deve ser preparado em conjunto com o bibliotecário
+  fichacatalografica={\input{tcc/configs/ficha}},
+}

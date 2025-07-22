@@ -1,0 +1,109 @@
+% Identificacao
+% O pacote se identifica e a versao de LaTeX necessaria
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{helper}[2023/12/11 Helper geral]
+
+% Gerais
+% \RequirePackage[utf8]{inputenc}
+% \RequirePackage[brazilian]{babel}
+\RequirePackage{graphicx} % Para figuras
+\RequirePackage{color} % Fontes coloridas
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{fancyhdr}
+% \RequirePackage[symbol]{footmisc}
+\RequirePackage{enumerate}
+\RequirePackage{setspace}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{siunitx} % tabelas
+\sisetup{
+  round-precision = 16,           % 16 casas decimais
+  output-decimal-marker = {.},    % Ponto como separador decimal
+  group-digits = integer,         % Agrupa os dígitos inteiros
+  table-format = 2.16
+}
+
+% % Computacao
+\RequirePackage{verbatim}
+\RequirePackage{textcomp}
+\RequirePackage{listings}
+% \RequirePackage{minted}
+
+% % Pacotes necessarios e definicioes preliminares
+\RequirePackage{bm} % 'Bold" em equacoes
+\RequirePackage{amssymb, amsmath, amsfonts} % Mais simbolos e equacoes
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+% \RequirePackage{xfrac}
+\RequirePackage{cancel}
+\RequirePackage{amsthm}
+\RequirePackage[math]{cellspace}
+
+% DEFINICOES, TEOREMAS, LEMAS, COROLARIOS
+% \newtheoremstyle{indented}
+%   {10pt}% space before
+%   {10pt}% space after
+%   {\addtolength{\@totalleftmargin}{3.5em}
+%    \addtolength{\linewidth}{-3.5em}
+%    \parshape 1 3.5em \linewidth}% body font
+%   {}% indent
+%   {\bfseries}% header font
+%   {.}% punctuation
+%   {.5em}% after theorem header
+%   {}% header specification (empty for default)
+% \makeatother
+% \theoremstyle{indented}
+\newtheorem{probmodelo}{Problema-modelo}[chapter]
+\newtheorem{method}{Método}[section]
+\newtheorem{definition}{Definição}[section]
+\newtheorem{observation}{Observação}[section]
+\newtheorem{proposition}{Proposição}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}{Corolário}[theorem]
+% \newenvironment{Proof}[1][Demonstração]
+%   {\proof[#1]\leftskip=3.5em\rightskip=1cm}
+%   {\endproof}
+\newenvironment{Proof}[1][Demonstração]
+  {\proof[#1]}
+  {\endproof}
+
+% traco de matriz
+\DeclareMathOperator{\Tr}{tr}
+
+% VETOR, PRIMEIRA E SEGUNDA DERIVADAS DE VETOR
+\newcommand{\vet}[1]{\bm #1}
+\newcommand{\dvet}[1]{\dot {\bm #1}}
+\newcommand{\ddvet}[1]{\ddot {\bm #1}}
+% VERSOR
+\newcommand{\versor}[1]{\hat{\vet #1}}
+% PRODUTO INTERNO
+\newcommand{\prodint}[2]{\left\langle #1, #2 \right\rangle}
+% NORMA
+\newcommand\norma[1]{\left\Vert #1 \right\Vert}
+% RE
+\DeclareMathOperator{\RePart}{\operatorname{Re}}
+
+% CONJUNTOS
+\newcommand{\R}{\mathbb{R}} % Reais
+\newcommand{\Complexos}{\mathbb{C}} % Complexos
+\newcommand\continuo{{\mathscr{C}}} % Espaços C^k
+
+% DERIVADA
+\newcommand{\der}[2]{\dfrac{d #1}{d #2}}
+% DERIVADA PARCIAL
+\newcommand{\derpar}[2]{\dfrac{\partial #1}{\partial #2}}
+
+% HAMILTONIANO
+\newcommand{\Ham}{{\cal H}}
+
+% ESPACAMENTO DE CELULAS
+\setlength\cellspacetoplimit{3pt}
+\setlength\cellspacebottomlimit{3pt}
+
+% RODAPE COM MARCACAO EM NUMERACAO ARABE
+% \renewcommand{\thefootnote}{\arabic{footnote}}
+
+% BIBLIOGRAFIA
+% \RequirePackage[backend=biber, style=abnt, ittitles, maxcitenames=1]{biblatex}
+% \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}

@@ -1,0 +1,28 @@
+%!TeX root=../tese.tex
+%("dica" para o editor de texto: este arquivo é parte de um documento maior)
+% para saber mais: https://tex.stackexchange.com/q/78101/183146
+
+% As palavras-chave são obrigatórias, em português e em inglês, e devem ser
+% definidas antes do resumo/abstract. Acrescente quantas forem necessárias.
+\palavrachave{Problema de N-Corpos Gravitacional}
+\palavrachave{Simulação numérica}
+\palavrachave{Métodos simpléticos}
+\palavrachave{Mecânica Hamiltoniana}
+\palavrachave{Setas do tempo}
+
+\keyword{Gravitational N-Body Problem}
+\keyword{Numerical simulation}
+\keyword{Symplectic methods}
+\keyword{Hamiltonian Mechanics}
+\keyword{Arrows of time}
+
+% O resumo é obrigatório, em português e inglês. Estes comandos também
+% geram automaticamente a referência para o próprio documento, conforme
+% as normas sugeridas da USP.
+\resumo{
+A evolução de sistemas gravitacionais pode ser descrita através do Problema de N-Corpos Gravitacional (PNCG), cuja simulação numérica permite visualizar e testar propriedades qualitativas do Problema. As simulações são feitas através de integradores numéricos temporais, e estes existem em diversos tipos. Apresentamos métodos comuns, mas também métodos simpléticos, que possuem a propriedade de conservação da estrutura simplética do problema, apresentada em um capítulo dedicado à Mecânica Analítica, com foco na formulação Hamiltoniana. Tratamos também de um corretor numérico baseado em integrais primeiras, e formas de lidar com colisões e quase-colisões de corpos, usando choques elásticos e um amortecimento no potencial. Um simulador de PNCG em Fortran foi desenvolvido, e sua implementação e desafios técnicos são discutidos. Como aplicação, discutimos brevemente conceitos da Dinâmica de Formas, um modelo alternativo de gravitação, que sobre o PNCG fornece setas do tempo gravitacionais - direções para o qual o sistema evolui e que dependem somente das posições dos corpos -, e através de simulações numéricas as visualizamos.
+}
+
+\abstract{
+The evolution of gravitational systems can be described through the Gravitational N-Body Problem (GNBP), whose numerical simulation allows visualizing and testing qualitative properties of the Problem. The simulations are performed through temporal numerical integrators, and these exist in several types. We present common methods, but also symplectic methods, which have the property of conserving the symplectic structure of the problem, presented in a chapter dedicated to Analytical Mechanics, focusing on the Hamiltonian Formulation. We also discuss a numerical corrector based on first integrals, and ways to deal with collisions and near-collisions of bodies, using elastic shocks and a damping in the potential. A GNBP simulator in Fortran was developed, and its implementation and technical challenges are discussed. As an application, we briefly discuss concepts of Shape Dynamics, an alternative model of gravitation, which over the GNBP provides gravitational arrows of time - directions in which the system evolves and which depend only on the positions of the bodies -, and through numerical simulations we visualize them.
+}

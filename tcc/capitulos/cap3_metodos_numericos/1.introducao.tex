@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% > CONCEITOS BASICOS DE INTEGRACAO NUMERICA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conceitos básicos de integração numérica}
+
+A ideia dos integradores numéricos é aproximar a solução exata de um problema de Cauchy em um intervalo $[a,b] \subseteq \R$, discretizando-o em um conjunto finito de $m+1$ pontos na forma
+\begin{equation*}
+    t_0 = a, \quad
+    t_1 = t_0 + h_1 \quad
+    \hdots \quad
+    t_m = t_{m-1} + h_m = b,
+\end{equation*}
+onde cada $h_i \in \R$, $i = 1, ..., m$, é um \textit{passo de integração do instante $i$}. Neste trabalho, exceto quando explicitado o contrário, $h_i = h = (b-a)/m$, para todo $i$, então a discretização assume a forma
+\begin{equation*}
+    t_k = a + hk, \quad k = 1, 2, ..., m.
+\end{equation*}
+
+Com o intervalo discretizado, é possível obter uma diversidade de discretizações do problema em si. Assim, um problema do tipo
+\begin{equation}\label{eq:problema_de_cauchy}
+    \begin{cases}
+        \der{}{t} y(t) = f(t,y(t)), \quad t \in [a,b], \\
+        y(t_0) = y(a) = y_0,
+    \end{cases}
+\end{equation}
+com $f:[a,b] \times \R^n \to \R^n$ e $y$ com condições suficientes para garantir existência e unicidade em $[a,b]$, pode ser discretizado na forma:
+\begin{equation*}
+    y(t_{k+1}) \approx y_{k+1} = \Phi_h(t_k, y_k), \quad k = 0, 1, ..., m-1,
+\end{equation*}
+onde $\Phi_h$ é chamado \textit{fluxo numérico} ou \textit{discreto}. Quando depender somente de $h$, $t_k$ e $y_k$, diremos que $\Phi_h$ é um \textit{método de passo único}; no caso contrário, será um \textit{método de passo múltiplo}.
+
+Para cada instante da aproximação, podemos definir um \textit{erro local de discretização}.
+
+\begin{definition}\label{def:erro_local_discretizacao}
+    O \textbf{erro local de discretização} $\alpha_k$ do método numérico $\Phi_h$ em um instante discretizado $t_k \in [a,b]$ é dado por:
+    \begin{equation*}
+        \alpha_k := \dfrac{y(t_{k+1}) - \Phi_h(t_k, y(t_k))}{h}.
+    \end{equation*}
+\end{definition}
+
+Nesse sentido, suponha que $\Phi_h$ é um método de passo único, ou seja, $\Phi_h(t_k,y_k) = y_k + h \tilde{\Phi}_h(t_k,y_k)$. Pensando na integração de Riemann, é intuitivo que quanto menor o tamanho de $h$, menor também será o erro. Porém, se $h \to 0$, uma vez que $t_k = h k + t_0$, teria-se que $t_k = t_0$ sempre. A saída para isso é fixar $t \in [a,b]$ e manter $hk = t - t_0$ fixo com $h \to 0$, o que significa que $k \to \infty$. Temos então para o erro local:
+\begin{align*}
+    \lim_{h \to 0} \alpha_k
+    &= \lim_{h \to 0} \left[ \dfrac{y(t_{k+1}) - \Phi_h(t_k, y(t_k))}{h} \right] \\
+    &= \lim_{h \to 0} \left[ \dfrac{y(t_k + h) - y(t_k)}{h} - \tilde{\Phi}_h(t_k, y_k) \right] \\
+    &= f(t,y(t)) - \tilde{\Phi}_0(t,y(t)).
+\end{align*}
+
+Para um problema bem posto, espera-se de um método numérico então que o erro local deva ser cada vez menor, e que no limite seja zero. Nesse caso, dizemos que o método é \textit{consistente}.
+
+\begin{definition}
+    Dizemos que um integrador de passo único $\Phi_h(t_k,y_k) = y_k + h \tilde{\Phi}_h(t_k,y_k)$ é \textbf{consistente} se $\tilde{\Phi}_0(t,y) = f(t,y)$ ou, equivalentemente, $\lim_{h \to 0} \alpha_k = 0$, para $t \in [a,b]$ com $hk = t - t_0$ fixado.
+\end{definition}
+
+A consistência garante que, em alguma medida, a aproximação fornecida pelo método numérico (a partir de um valor exato e conhecido da trajetória) é próxima da solução exata do problema. Assim, também é possível atribuir à consistência uma \textit{ordem} da maneira que segue.
+
+\begin{definition}
+    Se existirem $C, h_0, q >0$ para quaisquer $h$ e $k$, tais que o erro local satisfaça:
+    \begin{equation*}
+        \max_k \norma{\alpha_k} \leq C h^q, \quad 0 < h \leq h_0,
+    \end{equation*}
+    então o método tem \textit{ordem de consistência} $q$ atrelada a norma $\norma{\cdot}$, que, a menos da explicitação do contrário, será a norma euclidiana usual.
+    Nesse caso, um método consistente com ordem de consistência $q$ pode ser escrito da seguinte maneira:
+    \begin{equation*}
+        y(t_{k+1}) = \Phi_h(t_k, y_k) + O(h^q).
+    \end{equation*}
+\end{definition}
+
+O que ocorre, porém, é que no geral se conhece somente o valor inicial do problema, e então define-se outra medida de erro, chamada \textit{erro global}. 
+
+\begin{definition}
+    O erro global $e_h(t_k)$ é o erro acumulado pelo método numérico até o instante discreto $t_k$:
+    \begin{equation*}
+        e_h (t_k) := e_k := y(t_k) - y_k.
+    \end{equation*}
+\end{definition}
+
+O que se espera de um método minimamente utilizável é que seu erro global esteja ligado somente com o tamanho do passo $h$, de modo que 
+\begin{equation}\label{eq:criterio_convergencia_1}
+    \lim_{h \to 0} \dfrac{e_k}{h} = 0, \quad k = 0, 1, ..., m-1.
+\end{equation}
+para qualquer problema de Cauchy bem posto. 
+
+\begin{definition}\label{def:convergencia}
+    Um integrador $\Phi_h$ para o qual vale \ref{eq:criterio_convergencia_1} para qualquer problema de Cauchy bem posto é dito \textbf{convergente}, e dizemos que o integrador de passo único e explícito tem ordem de convergência $p$ se, e só se,
+    \begin{equation*}
+        e_h(t) = O(h^{p+1}).
+    \end{equation*}
+\end{definition}
+
+A partir do erro global, é possível determinar condições suficientes para que um método de passo único explícito seja convergente. Supondo que $\tilde{\Phi}_h (t_k, \vet y_k) = \dfrac{1}{h} (\Phi_h (t_k, \vet y_k) - \vet y_k)$ satisfaça a condição de Lipschitz para $\vet y$, ou seja,
+\begin{equation*}
+    \norma{\tilde{\Phi}_h(t, \vet y_1) - \tilde{\Phi}_h(t, \vet y_2)}
+    \leq
+    L \norma{\vet y_1 - \vet y_2}
+\end{equation*}
+e que o erro de discretização local $\alpha_k$ seja limitado por $\alpha$, então \citep[29]{alexandre_megiorin_roma_metodos_nodate}
+\begin{equation}
+    \norma{e_k} \leq e^{k h L} \norma{e_0} + \dfrac{e^{k h L} - 1}{L} \alpha.
+\end{equation}
+
+Para o que interessa neste trabalho, $\norma{e_0} = 0$, então se um método explícito e de passo único é consistente com ordem $q$, ou seja, existe $C$ constante tal que $\alpha = C h^q$, então
+\begin{equation*}
+    \norma{e_k} \leq \dfrac{e^{k h L} - 1}{L} C h^q.
+\end{equation*}
+Dessa forma, o método também é convergente de ordem $q$.
+
+Através do erro global, também é possível obter uma expansão em série de potências para uma aproximação numérica. Trataremos a questão para problemas de Cauchy em $\R$ por maior facilidade de exposição, mas todo o processo pode ser estendido para mais dimensões aplicando normas sobre os vetores.
+
+\begin{theorem}\label{teorema:erro_global_expansao}\citep[30]{alexandre_megiorin_roma_metodos_nodate}
+    Considere um problema de Cauchy com solução suficientemente diferenciável em um intervalo $[a,b]$ e uma aproximação $\eta(t,h)$ obtida através de um método de passo único
+    \begin{equation*}
+        \eta_{k+1} = \eta_k + h \tilde \Phi(t_k, \eta_k, h)
+    \end{equation*}
+    de ordem $p$ com tamanho de passo fixo $h = (t-t_0)/n$ para cada $t_0, t \in [a,b]$ e $n$ inteiro positivo. Nessas condições, $\eta(t,h)$ admite expansão em potências de $h$ da forma
+    \begin{equation*}
+        \eta(t,h) = y(t) + h^p e_p (t) + h^{p+1} e_{p+1} (t) + \hdots + h^N e_N(t) + h^{N+1} E_{N+1}(t,h).
+    \end{equation*}
+\end{theorem}
+
+Do teorema \ref{teorema:erro_global_expansao} decorre que o erro de discretização global no instante $t$ pode ser escrito como
+\begin{equation*}
+    - e_h (t) = \eta (t,h) - y(t) = \sum_{j=p}^N h^j e_j(t) + h^{N+1} E_{N+1} (t,h).
+\end{equation*}
+Nesse sentido, para um $h$ suficientemente pequeno, temos uma aproximação razoável para o erro:
+\begin{equation*}
+    - e_h (t) = \eta (t, h) - y(t) \approx e_p (t) h^p.
+\end{equation*}
+Observe que a diferença entre aproximações com tamanho de passo $h$ e $h/2$ pode ser aproximado por
+\begin{equation*}
+    \eta (t, h) - \eta(t, h/2) \approx e_p(t) \left(\dfrac{h}{2}\right)^p (2^p - 1)
+\end{equation*}
+e logo
+\begin{equation*}
+    e_p (t) \left(\dfrac{h}{2}\right)^p \approx \dfrac{\eta (t, h) - \eta (t,h/2)}{2^p - 1}.
+\end{equation*}
+Isso fornece um valor aproximado para $e_{h/2}(t)$ se considerando um $h > 0$ suficientemente pequeno:
+\begin{equation*}
+    e_{h/2} (t) \approx - \dfrac{\eta(t,h) - \eta(t,h/2)}{2^p -  1}.
+\end{equation*}
+
+Todo esse processo supõe que o valor de $p$ é conhecido. No entanto, para fins práticos, é possível estimar $p$ realizando simulações com diferentes tamanhos de passo. Para um tamanho de passo $h$ de referência, considere $\eta (t, 2h)$, $\eta (t, h)$ e $\eta (t, h/2)$. Temos:
+\begin{equation*}
+    \left|\dfrac{\eta(t, 2h) - \eta(2,h)}{\eta(t, h) - \eta(t, h/2)}\right|
+    \approx
+    \left| \dfrac{e_{\tilde p}(t) (2^{\tilde p} - 1) h^{\tilde p}}{e_{\tilde p} (t) (1-2^{-\tilde p}) h^{\tilde p}} \right| = 2^{\tilde p},
+\end{equation*}
+então
+\begin{equation}\label{eq:aproximacao_ordem}
+    \tilde p \approx \log_2{\left| \dfrac{\eta(t, 2h) - \eta(2,h)}{\eta(t, h) - \eta(t, h/2)} \right|}.
+\end{equation}
+Para triplas de passos $(2h, h, h/2)$, $(h,h/2,h/4)$, ..., cada vez menores, a sequência $\tilde p_1, \tilde p_2, ...$ converge para $p$.
+
+Para mais detalhes de integradores de passo único, o material de \cite{alexandre_megiorin_roma_metodos_nodate}, o qual foi consultado para esta seção, é bastante agregador. Para agora, com esses conceitos em mãos, já é possível começar a busca por integradores numéricos tradicionais, baseados somente em conceitos de cálculo e geometria analítica.

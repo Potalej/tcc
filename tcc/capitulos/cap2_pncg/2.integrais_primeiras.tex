@@ -1,0 +1,32 @@
+\section{Integrais primeiras}
+O PNCG tridimensional possui dez integrais primeiras, cada uma correspondente a uma simetria dentro do sistema.
+
+\begin{theorem}
+    O PNCG possui como integrais primeiras não-triviais a energia total $E$ (correspondente à invariância temporal), momento angular total $\vet J$ (correspondente à invariância sob rotações), o momento linear total $\vet P$ e a trajetória $\vet G(t)$ do centro de massas $\vet q_{cm}$ (correspondentes à invariância sob translações).
+\end{theorem}
+\begin{Proof}
+    Para a energia total, a demonstração já foi feita no Teorema \ref{teorema:energia_total}.
+
+    Para o momento linear total $\vet P = \sum_{a=1}^N \vet p_a$, basta aplicar a definição \ref{def:integral_primeira}:
+    \begin{equation*}
+        \der{\vet P}{t} = \sum_{a=1}^{N} \der{\vet p_a}{t} = \sum_{a=1}^N \vet F_a = \vet 0,
+    \end{equation*}
+    pois o sistema é fechado.
+
+    Para a trajetória do centro de massas, temos:
+    \begin{equation}
+        \vet G(t) = M \vet q_{cm} - t \vet P
+        \Rightarrow
+        \der{G}{t} = M \dfrac{\vet P}{M} - \vet P = \vet 0.
+    \end{equation}
+    No caso em que $\vet P = \vet 0$, a conservação de $G(t)$ equivale à conservação de $\vet q_{cm}$.
+
+    Por fim, o momento angular total:
+    \begin{equation}
+        \der{\vet J}{t} 
+        = \sum_{a=1}^N \vet q_a \times \dvet p_a
+        = \sum_{a=1}^N \sum_{b\neq a}^{N} \dfrac{G m_a m_b}{r_{ab}^3} \vet q_a \times \vet q_b = \vet 0.
+    \end{equation}
+\end{Proof}
+
+O fato de o centro de massas do Problema ter uma rota linear e seu momento generalizado ($\vet P$) ser uma integral primeira significa que se o centro de massas partir da origem e o momento linear total for nulo, o sistema não deverá se mover. Isso é particularmente interessante para simulações numéricas, mas mesmo analiticamente ainda é uma propriedade que facilita o estudo.
